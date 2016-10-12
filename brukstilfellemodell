@@ -1,0 +1,19 @@
+Brukstilfellemodell
+
+Bruker:
+Foreleser 
+-> Opprett bruker
+-> Login
+-> Opprett spørris
+  -> Legg til spørsmål
+-> Se oversikt over opprettede spørriser
+-> Redigere/slett spørris
+  -> Rediger spørsmål
+  -> Slett spørsmål
+-> Se resultat av spørris
+-> Logout
+
+Student
+-> Skriv inn kode for søprris
+-> Svar på spørsmål
+
