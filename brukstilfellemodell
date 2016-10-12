@@ -6,10 +6,13 @@ Foreleser
 -> Login
 -> Opprett spørris
   -> Legg til spørsmål
+  -> Lagre spørris
 -> Se oversikt over opprettede spørriser
 -> Redigere/slett spørris
   -> Rediger spørsmål
   -> Slett spørsmål
+  -> Lagre spørris
+  -> Slett spørris
 -> Se resultat av spørris
 -> Logout
 
