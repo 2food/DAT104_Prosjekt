@@ -1,20 +1,25 @@
+Visjonsdokument for Spørris
 
 I dette prosjektet vil vi utvikle en webapplikasjon med arbeidstittelen "Spørris".
 
-Formålet med denne applikasjonen er å være et verktøy for at forelesere skal kunne lage anonyme spørreundersøkelser til studentenene sine. 
-Studente skal kunne svare på disse ved å gå inn på gitte url. 
+Denne applikasjonen gjør det mulig for forelesere å lage anonyme spørreundersøkelser til studentenene sine, som studente kan svare på.
 
-The benefits and opportunities that will be provided by building the program: 
+Dette gjør læringen mer interaktiv og gøy for både studenter og forelesere. 
 
-The problems that spørris will solve:
-
-Who the target users are:
-
-
-
-Applikasjonens funskjonalitet og krav er sortert etter viktighet:
+Dette er en kort oversikt over applikasjonens funskjonalitet og krav:
 (Man skal kunne...)
+1. opprette og lagre en spørris. 
+2. svare på spørrisen.
+3. se oversikt over resultater. 
+4. endre på eksisterende spørriser.
 
+Applikasjonen krever at brukerne har en nettleser. 
+Applikasjonen bruker en Tomee server og en PostgreSQL database.
+
+
+
+Her er en mer detaljert oversikt over funksjonalitet og krav:
+(Man skal kunne...)
 1. opprette og lagre en spørris. 
   a. Skal kunne definere antall spørsmål.
   b. Skal kunne definere antall svaralternativer.
@@ -33,5 +38,3 @@ Applikasjonens funskjonalitet og krav er sortert etter viktighet:
   
 4. endre på spørriser.
   a. Man skal kunne enkelt holde styr på spørrisene sine. 
-
-Some of the mos essential nonfunctional requirements:
