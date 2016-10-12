@@ -1,26 +1,37 @@
-MALES ONLY.
-KUN MENN KAN BRUKE DENNE APPLIKASJONEN.
 
 I dette prosjektet vil vi utvikle en webapplikasjon med arbeidstittelen "Spørris".
 
 Formålet med denne applikasjonen er å være et verktøy for at forelesere skal kunne lage anonyme spørreundersøkelser til studentenene sine. 
 Studente skal kunne svare på disse ved å gå inn på gitte url. 
 
-Videre krav sortert etter viktighet:
-Man skal kunne...
+The benefits and opportunities that will be provided by building the program: 
+
+The problems that spørris will solve:
+
+Who the target users are:
+
+
+
+Applikasjonens funskjonalitet og krav er sortert etter viktighet:
+(Man skal kunne...)
+
 1. opprette og lagre en spørris. 
   a. Skal kunne definere antall spørsmål.
   b. Skal kunne definere antall svaralternativer.
   c. Svar skal kunne være forhåndsdefinerte (avkrkysning) eller fritekst.
   d. Foreleser skal kunne bestemme om å gå frem og tilbake er tillat. 
   e. Foreleser skal kunne bestemme det er tidsbegrensning. 
+  
 2. svare på spørrisen.
   a. Lærer blir gitt url til spørrisen.
   b. Studentene går inn på URL og får spørsmålene presentert i rekkefølge. 
   c. Stud skal kunne gå frem og tilbake i spørsmålene, hvis tillat. 
   d. Tidsbegrensning hvis foreleser har satt det. 
+  
 3. se oversikt over resultater. 
+  a. se grafisk fremstilling av resultater. 
+  
 4. endre på spørriser.
   a. Man skal kunne enkelt holde styr på spørrisene sine. 
-5. se grafisk fremstilling av resultater. 
 
+Some of the mos essential nonfunctional requirements:
