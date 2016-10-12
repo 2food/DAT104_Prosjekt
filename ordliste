@@ -1,0 +1,14 @@
+
+Spørris: Navnet på applikasjonen. Med artikkel (En spørris/spørrisen/spørriser/spørrisene) refererer ordet til en spesifik spørreundersøkelse. 
+
+Foreleser: Brukertype som oppretter og eier spørriser. 
+
+Student: Bruketrtype som svarer på spørriser. 
+
+Spørsmål: Spørriser består av flere spørsmål. Spørmålet består spørreteksten og svaralternativer. 
+  Spørretekst: Teksten i spørsmål.
+
+Svar: Samlingen av valgte svaralternativer/fritekst i et spørsmål.
+  Svaralternativ: Ett av de forhåndsdefinerte alternativene i et spørsmål.
+  Svartekst: Et svaralternativ som tar studentinput i tekstform. 
+
