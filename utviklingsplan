@@ -1,13 +1,6 @@
-Utviklingsplan
+Iterasjonsplan
 
-1. iterasjon
-
--mulighet til å lage en spørris med ett spørsmål, som lagres i servletten.
--muliget til å svare på den.
-
-2. iterasjon
-
--lagring i database
--flere deltagere
--flere spørsmål
-
+Utdypingsfasen:
+  - Adressere de største risikoene
+  - Bygge en skjelettarkitektur
+  - Forfine prosjektplan
