@@ -1,10 +1,21 @@
 Risikoer:
 
-- Problemer med kommunikasjon med database.
+- Problemer i kommunikasjon med database.
+Konsikvensnivå: høgt
+Sannsynlighetsfaktor: lav
 Løsning: Om problemene blir uhåndterlige har vi en database vi har benyttet tidligere som vi har erfart fungerer
 
 - Det kan være vanskelig å kombinere kundens ønske om valgfrihet med et enkelt grensesnitt.
+Konsikvensnivå: middels
+Sannsynlighetsfaktor: middels
 Løsning: Finne bedre løsninger som kan gjøre behovene til foreleser tilfredstilt samtidig som applikasjonen er letthåndterlig og oversiktelig.
 
 - Kunnskapsnivået vårt kan være utilstrekkelig til å gjøre alt vi ønsker å gjøre med denne applikasjonen innen gitt tidsrom.
+Konsikvensnivå: høgt
+Sannsynlighetsfaktor: lav
 Løsning: Finne enklere måte å gjøre det på, kutte ut elementer som ikke lar seg gjennomføre.
+
+- Problemer innad i gruppen (fravær, dårlig kommunikasjon, uenigheter etc..)
+Konsikvensnivå: høgt
+Sannsynlighetsfaktor: middels
+Løsning: God og kontinuerlig kommunikasjon ved gitt kommunikasjonsvertøy. God oppfølging av hverandre underveis i prosjektet. 
