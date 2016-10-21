@@ -1,4 +1,4 @@
-package no.hib.dat104.prosjekt.controller;
+package no.hib.dat104.project.controller;
 
 public class UrlMappings {
 	public static final String LOGINURL = "login";
