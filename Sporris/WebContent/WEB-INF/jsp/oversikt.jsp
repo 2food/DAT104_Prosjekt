@@ -38,6 +38,6 @@
 		</tr>
 	</table>
 	
-	<p> <input type="submit" value="Legg Til Spørris"></p>
+	<p> <a href="/Sporris/leggtil.html">Legg Til Spørris</a></p>
 </body>
 </html>
