@@ -1,0 +1,29 @@
+
+Arkitektur
+
+For referanse se modell.png
+
+Hvert objekt i modellen burde være sin egen servlet.
+
+
+Databaserelasjoner:
+s_user: uid (PK), user_name, user_password
+sporris: sid (PK), sporris_name, sporris_user (FK s_user(uid)), sporris_tag, is_active
+question: qid (PK), question_text, question_sporris (FK sporris(sid)), allow_multiple, allow_text
+alternative: aid(PK), alternative_text, alternative_question (FK question(qid))
+result: rid (PK), result_name, result_sporris (FK sporris(sid))
+response: response_id (PK), response_text, response_result (FK result(rid))
+
+EAO-klasse for å håndtere lagring i database.
+
+Validator-klasser:
+LoginValidator
+	userExists
+	passwordMatches
+TagValidator
+	tagExists
+RegisterValidator
+	userExists
+	validUsername
+	validPassword
+
