@@ -16,7 +16,7 @@ public class User {
 	private String user_name;
 	private String user_password;
 	
-	@OneToMany(mappedBy = "s_user")
+	@OneToMany(mappedBy = "sporris_user")
 	private List<Sporris> sporrises;
 	
 	

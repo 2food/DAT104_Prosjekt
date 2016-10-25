@@ -15,7 +15,7 @@ public class Alternative {
 	private String alternative_text;
 	@ManyToOne
 	@JoinColumn(name = "alternative_question", referencedColumnName = "qid")
-	private int alternative_question;
+	private Question alternative_question;
 
 	public int getAid() {
 		return aid;
@@ -33,11 +33,11 @@ public class Alternative {
 		this.alternative_text = alternative_text;
 	}
 
-	public int getAlternative_question() {
+	public Question getAlternative_question() {
 		return alternative_question;
 	}
 
-	public void setAlternative_question(int alternative_question) {
+	public void setAlternative_question(Question alternative_question) {
 		this.alternative_question = alternative_question;
 
 	}

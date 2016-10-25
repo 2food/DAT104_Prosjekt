@@ -20,8 +20,8 @@ public class Sporris {
 	private boolean active;
 	
 	@ManyToOne
-    @JoinColumn(name="s_user", referencedColumnName = "uid")
-    private User s_user;
+    @JoinColumn(name="sporris_user", referencedColumnName = "uid")
+    private User sporris_user;
 
 	@OneToMany(mappedBy = "question_sporris")
 	private List<Question> questions;

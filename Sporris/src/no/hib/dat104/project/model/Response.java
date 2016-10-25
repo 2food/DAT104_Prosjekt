@@ -11,33 +11,33 @@ import javax.persistence.Table;
 public class Response {
 
 	@Id
-	private int respnonse_id;
-	private String respnse_text;
+	private int response_id;
+	private String response_text;
 	@ManyToOne
 	@JoinColumn(name = "response_result", referencedColumnName = "rid")
-	private int response_result;
+	private Result response_result;
 
-	public int getRespnonse_id() {
-		return respnonse_id;
+	public int getResponse_id() {
+		return response_id;
 	}
 
-	public void setRespnonse_id(int respnonse_id) {
-		this.respnonse_id = respnonse_id;
+	public void setResponse_id(int response_id) {
+		this.response_id = response_id;
 	}
 
-	public String getRespnse_text() {
-		return respnse_text;
+	public String getResponse_text() {
+		return response_text;
 	}
 
-	public void setRespnse_text(String respnse_text) {
-		this.respnse_text = respnse_text;
+	public void setRespnse_text(String response_text) {
+		this.response_text = response_text;
 	}
 
-	public int getResponse_result() {
+	public Result getResponse_result() {
 		return response_result;
 	}
 
-	public void setResponse_result(int response_result) {
+	public void setResponse_result(Result response_result) {
 		this.response_result = response_result;
 	}
 

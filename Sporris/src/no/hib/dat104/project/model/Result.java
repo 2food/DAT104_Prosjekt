@@ -18,7 +18,7 @@ public class Result {
 	private String result_name;
 	@ManyToOne
 	@JoinColumn(name="result_sporris", referencedColumnName="sid")
-	private int result_sporris;
+	private Sporris result_sporris;
 	
 	@OneToMany(mappedBy = "response_result")
 	private List<Response> responses;
@@ -35,10 +35,10 @@ public class Result {
 	public void setResult_name(String result_name) {
 		this.result_name = result_name;
 	}
-	public int getResult_sporris() {
+	public Sporris getResult_sporris() {
 		return result_sporris;
 	}
-	public void setResult_sporris(int result_sporris) {
+	public void setResult_sporris(Sporris result_sporris) {
 		this.result_sporris = result_sporris;
 	}
 	

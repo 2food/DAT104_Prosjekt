@@ -6,5 +6,9 @@
 		<jta-data-source>sporris_database</jta-data-source>
 		<class>no.hib.dat104.prosjekt.model.User</class>
 		<class>no.hib.dat104.prosjekt.model.Sporris</class>
+		<class>no.hib.dat104.prosjekt.model.Question</class>
+		<class>no.hib.dat104.prosjekt.model.Alternative</class>
+		<class>no.hib.dat104.prosjekt.model.Result</class>
+		<class>no.hib.dat104.prosjekt.model.Response</class>
 	</persistence-unit>
 </persistence> 

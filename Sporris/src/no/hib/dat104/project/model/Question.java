@@ -18,7 +18,7 @@ public class Question {
 	private String question_text;
 	@ManyToOne()
 	@JoinColumn(name="question_sporris", referencedColumnName = "sid")
-	private int question_sporris;
+	private Sporris question_sporris;
 	private boolean allow_multiple;
 	private boolean allow_text;
 	
@@ -37,10 +37,10 @@ public class Question {
 	public void setQuestion_text(String question_text) {
 		this.question_text = question_text;
 	}
-	public int getQuestion_sporris() {
+	public Sporris getQuestion_sporris() {
 		return question_sporris;
 	}
-	public void setQuestion_sporris(int question_sporris) {
+	public void setQuestion_sporris(Sporris question_sporris) {
 		this.question_sporris = question_sporris;
 	}
 	public boolean isAllow_multiple() {
