@@ -4,6 +4,7 @@
 	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 	<persistence-unit name="s_test" transaction-type="JTA">
 		<jta-data-source>sporris_database</jta-data-source>
-		<!-- <class>no.hib.dat104.prosjekt.model.User</class> -->
+		<class>no.hib.dat104.prosjekt.model.User</class>
+		<class>no.hib.dat104.prosjekt.model.Sporris</class>
 	</persistence-unit>
 </persistence> 

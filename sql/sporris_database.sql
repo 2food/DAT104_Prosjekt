@@ -19,7 +19,7 @@ CREATE TABLE sporris (
 	sporris_name VARCHAR NOT NULL,
 	sporris_user INT NOT NULL,
 	sporris_tag VARCHAR(6) NOT NULL,
-	is_acrive BOOLEAN,
+	active BOOLEAN,
 	PRIMARY KEY(sid),
 	FOREIGN KEY(sporris_user) REFERENCES s_user(uid)
 );
