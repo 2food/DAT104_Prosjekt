@@ -1,5 +1,6 @@
 package no.hib.dat104.project.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,7 +14,7 @@ public class Alternative {
 	@Id
 	private int aid;
 	private String alternative_text;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "alternative_question", referencedColumnName = "qid")
 	private Question alternative_question;
 

@@ -2,6 +2,7 @@ package no.hib.dat104.project.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,7 +17,7 @@ public class User {
 	private String user_name;
 	private String user_password;
 	
-	@OneToMany(mappedBy = "sporris_user")
+	@OneToMany(mappedBy = "sporris_user", cascade = CascadeType.ALL)
 	private List<Sporris> sporrises;
 	
 	

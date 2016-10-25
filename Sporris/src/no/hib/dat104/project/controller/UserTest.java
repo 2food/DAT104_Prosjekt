@@ -43,7 +43,7 @@ public class UserTest extends HttpServlet {
 		s1.setSid(10);
 		s1.setSporris_name("hepp");
 		s1.setSporris_tag("123qwe");
-		
+		s1.setSporris_user(u1);
 		u1.getSporrises().add(s1);
 		
 		ueao.addUser(u1);  

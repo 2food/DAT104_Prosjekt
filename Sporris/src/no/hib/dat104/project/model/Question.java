@@ -2,6 +2,7 @@ package no.hib.dat104.project.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -16,13 +17,13 @@ public class Question {
 	@Id
 	private int qid;
 	private String question_text;
-	@ManyToOne()
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="question_sporris", referencedColumnName = "sid")
 	private Sporris question_sporris;
 	private boolean allow_multiple;
 	private boolean allow_text;
 	
-	@OneToMany(mappedBy = "alternative_question")
+	@OneToMany(mappedBy = "alternative_question", cascade = CascadeType.ALL)
 	private List<Alternative> alternatives;
 	
 	public int getQid() {

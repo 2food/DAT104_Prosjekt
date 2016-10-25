@@ -2,12 +2,14 @@ package no.hib.dat104.project.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(schema = "sporris_database", name = "sporris")
@@ -19,14 +21,14 @@ public class Sporris {
 	private String sporris_tag;
 	private boolean active;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="sporris_user", referencedColumnName = "uid")
     private User sporris_user;
 
-	@OneToMany(mappedBy = "question_sporris")
+	@OneToMany(mappedBy = "question_sporris", cascade = CascadeType.ALL)
 	private List<Question> questions;
 	
-	@OneToMany(mappedBy = "result_sporris")
+	@OneToMany(mappedBy = "result_sporris", cascade = CascadeType.ALL)
 	private List<Result> results;
 	
 	public int getSid() {
@@ -53,4 +55,23 @@ public class Sporris {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	public User getSporris_user() {
+		return sporris_user;
+	}
+	public void setSporris_user(User sporris_user) {
+		this.sporris_user = sporris_user;
+	}
+	public List<Question> getQuestions() {
+		return questions;
+	}
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+	public List<Result> getResults() {
+		return results;
+	}
+	public void setResults(List<Result> results) {
+		this.results = results;
+	}
+	
 }

@@ -53,9 +53,9 @@ CREATE TABLE result (
 CREATE TABLE response (
 	response_id INT NOT NULL,
 	response_text VARCHAR NOT NULL,
-	resonse_result INT NOT NULL,
+	response_result INT NOT NULL,
 	PRIMARY KEY(response_id),
-	FOREIGN KEY(resonse_result ) REFERENCES result(rid)
+	FOREIGN KEY(response_result ) REFERENCES result(rid)
 );
 
 INSERT INTO s_user VALUES (0,'user1','pass');
