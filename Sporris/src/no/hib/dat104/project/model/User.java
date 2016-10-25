@@ -8,7 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(schema = "sporris_database", name = "s_user")
+@Table(schema = "sporris_database", name = "user")
 public class User {
 	
 	@Id
