@@ -17,8 +17,8 @@ public class Sporris {
 	private boolean active;
 	
 	@ManyToOne
-    @JoinColumn(name="sporris_user", referencedColumnName = "uid")
-    private User sporris_user;
+    @JoinColumn(name="s_user", referencedColumnName = "uid")
+    private User s_user;
 
 	
 	public int getSid() {
