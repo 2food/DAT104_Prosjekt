@@ -1,4 +1,4 @@
-package no.hib.dat104.prosjekt.model;
+package no.hib.dat104.project.model;
 
 import java.util.ArrayList;
 import java.util.List;

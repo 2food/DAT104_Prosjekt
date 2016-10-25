@@ -1,4 +1,4 @@
-package no.hib.dat104.prosjekt.model;
+package no.hib.dat104.project.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

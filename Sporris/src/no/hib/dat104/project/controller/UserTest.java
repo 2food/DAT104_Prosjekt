@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import no.hib.dat104.prosjekt.model.User;
-import no.hib.dat104.prosjekt.model.UserEAO;
+import no.hib.dat104.project.model.User;
+import no.hib.dat104.project.model.UserEAO;
 
 
 @WebServlet("/UserTest")
