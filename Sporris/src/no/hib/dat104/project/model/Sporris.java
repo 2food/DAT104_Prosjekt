@@ -1,9 +1,12 @@
 package no.hib.dat104.project.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +23,11 @@ public class Sporris {
     @JoinColumn(name="s_user", referencedColumnName = "uid")
     private User s_user;
 
+	@OneToMany(mappedBy = "question_sporris")
+	private List<Question> questions;
+	
+	@OneToMany(mappedBy = "result_sporris")
+	private List<Result> results;
 	
 	public int getSid() {
 		return sid;

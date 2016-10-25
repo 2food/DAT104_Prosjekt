@@ -1,9 +1,12 @@
 package no.hib.dat104.project.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +20,8 @@ public class Result {
 	@JoinColumn(name="result_sporris", referencedColumnName="sid")
 	private int result_sporris;
 	
+	@OneToMany(mappedBy = "response_result")
+	private List<Response> responses;
 	
 	public int getRid() {
 		return rid;
