@@ -28,5 +28,4 @@ public class RegistrerTest {
 		assertFalse(validator.passwordsmatches("Passord", "Password"));
 		assertFalse(validator.passwordsmatches("Password", "password"));
 	}
-
 }
