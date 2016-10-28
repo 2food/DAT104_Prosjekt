@@ -4,16 +4,18 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
+      <x>580</x>
       <y>300</y>
-      <w>210</w>
-      <h>100</h>
+      <w>230</w>
+      <h>130</h>
     </coordinates>
-    <panel_attributes>_Sørsmål_
+    <panel_attributes>_Question_
 --
-Spørsmål
-SvarAlternativ
-Spørris - foreign key
+questionID (PK)
+question_text
+question_sporris (FK sporris(sID))
+allow_multiple
+allow_text
 
 </panel_attributes>
     <additional_attributes/>
@@ -22,14 +24,15 @@ Spørris - foreign key
     <id>UMLClass</id>
     <coordinates>
       <x>180</x>
-      <y>100</y>
+      <y>110</y>
       <w>220</w>
-      <h>70</h>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>_Table Bruker_
+    <panel_attributes>_s-user_
 --
-Brukernavn - unik id - primary key
-passord</panel_attributes>
+userID (PK)
+user_name
+user_password</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -38,14 +41,15 @@ passord</panel_attributes>
       <x>190</x>
       <y>300</y>
       <w>210</w>
-      <h>100</h>
+      <h>120</h>
     </coordinates>
-    <panel_attributes>_Spørris_
+    <panel_attributes>_Sorris_
 --
-Navn - unik id - primary key
-Beskrivelse
-#kode
-Bruker - foreign key
+sporrisID (PK)
+sporris_name
+sporris_user (FK s_user(uid))
+sporris_tag
+is_active
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -53,28 +57,89 @@ Bruker - foreign key
     <id>Relation</id>
     <coordinates>
       <x>280</x>
-      <y>160</y>
+      <y>200</y>
       <w>50</w>
-      <h>160</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1..*
 </panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>390</x>
       <y>330</y>
-      <w>230</w>
+      <w>210</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=1..*
 </panel_attributes>
-    <additional_attributes>10.0;20.0;210.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;190.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>300</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>_Alternative_
+--
+aID (PK)
+alternative_text
+alternative_question (FK question(qID))
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1210</x>
+      <y>310</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>_Result_
+--
+rID (PK)
+result_name
+result_sporris (FK sporris(sID))
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>500</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>_Response_
+--
+responsID (PK)
+response_text
+response_result (FK result(rID))</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>320</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1..*
+</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
   </element>
 </diagram>

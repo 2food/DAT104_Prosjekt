@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>100</x>
+      <y>50</y>
+      <w>210</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>_SporrisEAO_
+--
+add
+remove
+findAll
+Update
+findByTag
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>50</y>
+      <w>210</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>_userEAO_
+--
+add
+remove
+findUser
+UpdateUser
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>50</y>
+      <w>210</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>_LoginValidator_
+--
+userExists
+passwordMatches</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1000</x>
+      <y>50</y>
+      <w>210</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>_registerValidator_
+--
+userExists
+validUsername
+validPassowrd</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>100</x>
+      <y>270</y>
+      <w>210</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>_SessionHelper_
+--
+SignIn
+SignOut
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
