@@ -31,7 +31,7 @@ public class UserTest extends HttpServlet {
 		for(User u : l) {
 			out.println(u.getUser_name() + "<br />");
 		}
-
+		
 		User u1 = new User();
 		u1.setUid(10);
 		u1.setUser_name("user2");
