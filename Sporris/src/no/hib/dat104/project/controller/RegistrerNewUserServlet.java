@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import no.hib.dat104.project.helpers.GenerateID;
 import no.hib.dat104.project.helpers.SessionHelper;
 import no.hib.dat104.project.javabeans.LoginJavaBean;
 import no.hib.dat104.project.javabeans.RegistrerJavaBean;
+import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
 import no.hib.dat104.project.validators.RegisterValidator;
 
@@ -71,7 +73,11 @@ public class RegistrerNewUserServlet extends HttpServlet {
 			//Legger til en login, true og username i session
 			SessionHelper.logInUser(request);
 			//Legg til bruker i databasen
-			//User user = new User();
+			User user = new User();
+			user.setUser_name(username);
+			user.setUser_password(userpw);
+			int uid = GenerateID.userIDInt(userEAO);
+			user.setUid(uid);
 			response.sendRedirect(OVERSIKTURL);
 		} else {
 			response.sendRedirect(NEWUSERURL);
