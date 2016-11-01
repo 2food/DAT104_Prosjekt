@@ -5,6 +5,7 @@ import static no.hib.dat104.project.controller.UrlMappings.OVERSIKTURL;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,12 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import no.hib.dat104.project.javabeans.LoginJavaBean;
+import no.hib.dat104.project.model.UserEAO;
 import no.hib.dat104.project.validators.LoginValidator;
 
 @WebServlet("/" + LOGINURL)
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@EJB
+	private UserEAO ueao;
 	/*
 	 * doGet-metode for LoginServlet. Invaliderer session hvis den eksisterer og
 	 * oppretter ny. Oppretter LoginJavaBean for logininfo. Forwarder til
@@ -40,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 
 	/*
 	 * Tar parametre fra innlogging og setter de i LoginaJavaBean.
-	 * 
+	 * Sjekker om login er gyldig
 	 * @author Tormod
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -51,8 +55,9 @@ public class LoginServlet extends HttpServlet {
 		LoginJavaBean logininfo = (LoginJavaBean) session.getAttribute("logininfo");
 		logininfo.setUsername(username);
 		logininfo.setPassword(password);
-		logininfo.setValidUsername(LoginValidator.usernameValidator(username));
-		logininfo.setValidPassword(LoginValidator.passwordValidator(password));
+		LoginValidator.validate(logininfo, ueao);
+//		logininfo.setValidUsername(LoginValidator.usernameValidator(username));
+//		logininfo.setValidPassword(LoginValidator.passwordValidator(password));
 		if (!logininfo.isValidUsername() || !logininfo.isValidPassword()) {
 			request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 		} else {
