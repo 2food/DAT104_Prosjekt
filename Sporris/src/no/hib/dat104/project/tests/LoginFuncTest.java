@@ -7,6 +7,10 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
+/*
+ * Funskjonell testing av login funksjonalitet
+ * @author Tormod
+ */
 public class LoginFuncTest {
 
 	private static final String HOST = "localhost";
