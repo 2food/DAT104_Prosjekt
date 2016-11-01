@@ -2,7 +2,10 @@ package no.hib.dat104.project.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,13 +17,14 @@ import javax.persistence.Table;
 public class Result {
 	
 	@Id
+	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int rid;
 	private String result_name;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="result_sporris", referencedColumnName="sid")
 	private Sporris result_sporris;
 	
-	@OneToMany(mappedBy = "response_result")
+	@OneToMany(mappedBy = "response_result", cascade = CascadeType.ALL)
 	private List<Response> responses;
 	
 	public int getRid() {

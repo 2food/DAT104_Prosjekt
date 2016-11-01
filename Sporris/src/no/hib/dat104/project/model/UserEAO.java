@@ -1,10 +1,10 @@
 package no.hib.dat104.project.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -26,8 +26,25 @@ public class UserEAO {
 		return q;
 	}
 	
-	public User findUser(int uid) {
+	public User findUser(Integer uid) {
 		return em.find(User.class, uid);
+	}
+	
+	/*
+	 * Finner User ved username som parameter.
+	 * @param String
+	 * @return User
+	 * @author Tormod
+	 */
+	public User findUser(String username) {
+		User user = null;
+		List<User> list = allUsers();
+		for (User u : list) {
+			if (u.getUser_name().equals(username)) {
+				user = u;
+			}
+		}
+		return user;
 	}
 	
 	public void updateUser(User s) {
@@ -36,6 +53,14 @@ public class UserEAO {
 	
 	public void removeUser(int uid) {
 		em.remove(em.find(User.class, uid));
+	}
+	
+	public boolean isOpen(){
+		return em.isOpen();
+	}
+	
+	public EntityTransaction getTransaction() {
+		return em.getTransaction();
 	}
 	
 

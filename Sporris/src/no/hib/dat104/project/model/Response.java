@@ -1,6 +1,9 @@
 package no.hib.dat104.project.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,9 +14,10 @@ import javax.persistence.Table;
 public class Response {
 
 	@Id
+	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int response_id;
 	private String response_text;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "response_result", referencedColumnName = "rid")
 	private Result response_result;
 
