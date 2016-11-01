@@ -25,6 +25,15 @@ public class SporrisEAO {
 		List<Sporris> q = query.getResultList();
 		return q;
 	}
+	
+	/**
+	 * 
+	 * @return new free id
+	 */
+	public int getNewId () {
+		return (Integer)em.createQuery("select max(s.sid) from Sporris s").getSingleResult() + 1;
+	}
+	
 	/*
 	 * Skal det være sid eller uid? Hvis det er feil så er det fordi det skal stå uid. 
 	 */
