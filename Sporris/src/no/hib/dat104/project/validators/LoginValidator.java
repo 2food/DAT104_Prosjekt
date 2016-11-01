@@ -1,40 +1,45 @@
 package no.hib.dat104.project.validators;
 
+import javax.ejb.EJB;
+
+import no.hib.dat104.project.javabeans.LoginJavaBean;
+import no.hib.dat104.project.model.User;
+import no.hib.dat104.project.model.UserEAO;
+
 /*
- * Validerer logininfo
+ * Validerer login
  * @author Tormod
  */
 
 public class LoginValidator {
 
+	
 
 	/*
-	 * Validerer username
-	 * Ikke valid hvis kortere enn 3 eler lengre enn 20 karakterer.
+	 * Sjekker om username finnes i databsen og om password er riktig
+	 * 
+	 * @Param LoginJavaBean
+	 * 
 	 * @author Tormod
 	 */
-	public static boolean usernameValidator(String username){
-		boolean valid = true;
-		if (username.length() < 3 || username.length() > 20) {
-			valid = false;
+	public static boolean validate(LoginJavaBean login, UserEAO ueao) {
+		ueao.isOpen();
+		User user = ueao.findUser(login.getUsername());
+		boolean valid = false;
+		if (user == null) {
+			// bruker finnes ikke
+			login.setValidUsername(false);
+			login.setValidPassword(true);
+		} else if (!login.getPassword().equals(user.getUser_password())) {
+			// bruker finnes, men passord er feil
+			login.setValidUsername(true);
+			login.setValidPassword(false);
+		} else {
+			// bruker finnes og passord er riktig
+			login.setValidUsername(true);
+			login.setValidPassword(true);
+			valid = true;
 		}
 		return valid;
 	}
-	
-	/*
-	 * Validerer password.
-	 * Ikke valid hvis kortere enn 8 karakterer
-	 * @author Tormod
-	 */
-	public static boolean passwordValidator(String password) {
-		boolean valid = true;
-		if (password.length() < 8) {
-			valid = false;
-		}
-		return valid;
-	}
-	
-
-	
-
 }
