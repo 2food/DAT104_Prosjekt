@@ -78,6 +78,7 @@ public class RegistrerNewUserServlet extends HttpServlet {
 			user.setUser_password(userpw);
 			int uid = GenerateID.userIDInt(userEAO);
 			user.setUid(uid);
+			
 			response.sendRedirect(OVERSIKTURL);
 		} else {
 			response.sendRedirect(NEWUSERURL);
