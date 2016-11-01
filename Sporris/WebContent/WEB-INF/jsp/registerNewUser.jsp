@@ -17,7 +17,7 @@
 				Brukernavn: <input type="text" name="username" value="${registrerInfo.username}" />
 			</p>
 			${registrerInfo.validUsername ? "" :"<p><font color='red'>Ugyldig brukernavn. Må være 3-20 karakterer.</font></p>"}
-			${registrerInfo.usernameExists ? "" :"<p><font color='red'>Brukernavn allerede i bruk.</font></p>"}
+			${registrerInfo.usernameExists ? "<p><font color='red'>Brukernavn allerede i bruk.</font></p>" :""}
 			<p>
 				Passord: <input type="password" name="userpassword" />
 			</p>
@@ -25,7 +25,6 @@
 			<p>
 				Gjenta passord: <input type="password" name="userpassword2" />
 			</p>
-			${registrerInfo.passwordsMatches ? "" : "<p><font color='red'>Passord må være like.</font></p>"  }
 			<p>
 				<input type="submit" value="Registrer" />
 			</p>

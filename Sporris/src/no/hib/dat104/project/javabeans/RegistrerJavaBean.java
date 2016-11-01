@@ -14,7 +14,7 @@ public class RegistrerJavaBean {
 	private boolean passwordsMatches;
 
 	public RegistrerJavaBean() {
-		this(null, null, null, true, true, true);
+		this(null, null, null, true, false, true);
 	}
 
 	public RegistrerJavaBean(String username, String userpassword1, String userpassword2, boolean validUsername,

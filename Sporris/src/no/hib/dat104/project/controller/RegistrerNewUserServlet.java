@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import no.hib.dat104.project.helpers.GenerateID;
 import no.hib.dat104.project.helpers.SessionHelper;
-import no.hib.dat104.project.javabeans.LoginJavaBean;
 import no.hib.dat104.project.javabeans.RegistrerJavaBean;
 import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
@@ -36,6 +35,14 @@ public class RegistrerNewUserServlet extends HttpServlet {
 		RegistrerJavaBean registrerInfo = new RegistrerJavaBean();
 		session.setAttribute("registrerInfo", registrerInfo);
 		request.getRequestDispatcher("WEB-INF/jsp/registerNewUser.jsp").forward(request, response);
+		System.out.println("do get");
+		System.out.println(registrerInfo.getUsername());
+		System.out.println(registrerInfo.getUserpassword1());
+		System.out.println(registrerInfo.getUserpassword2());
+
+		System.out.println(registrerInfo.isUsernameExists());
+		System.out.println(registrerInfo.isValidUsername());
+		System.out.println(registrerInfo.isPasswordsMatches());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -59,20 +66,20 @@ public class RegistrerNewUserServlet extends HttpServlet {
 		System.out.println(registrerInfo.getUsername());
 		System.out.println(registrerInfo.getUserpassword1());
 		System.out.println(registrerInfo.getUserpassword2());
-		
+
 		System.out.println(registrerInfo.isUsernameExists());
 		System.out.println(registrerInfo.isValidUsername());
 		System.out.println(registrerInfo.isPasswordsMatches());
-		
 
-		//Logger inn og går til oversiktssiden hvis registreringsinfo er gyldig
-		//henter siden på nytt hvis inpyt ikke er gyldig og viser feilmeldinger
+		// Logger inn og går til oversiktssiden hvis registreringsinfo er gyldig
+		// henter siden på nytt hvis inpyt ikke er gyldig og viser feilmeldinger
 		if (registrerInfo.isValidUsername() && !registrerInfo.isUsernameExists()
 				&& registrerInfo.isPasswordsMatches()) {
-			
-			//Legger til en login, true og username i session
+
+			// Legger til en login, true og username i session
 			SessionHelper.logInUser(request);
-			//Legg til bruker i databasen
+
+			// oppretter User og Legger til bruker i databasen
 			User user = new User();
 			user.setUser_name(username);
 			user.setUser_password(userpw);
