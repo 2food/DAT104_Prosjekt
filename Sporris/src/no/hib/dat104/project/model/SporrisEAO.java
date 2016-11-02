@@ -16,8 +16,8 @@ public class SporrisEAO {
 
 
 	
-	public void addSporris(Sporris d) {
-		em.persist(d);
+	public void addSporris(Sporris s) {
+		em.persist(s);
 	}
 
 	public List<Sporris> allSporris() {
@@ -34,20 +34,16 @@ public class SporrisEAO {
 		return (Integer)em.createQuery("select max(s.sid) from Sporris s").getSingleResult() + 1;
 	}
 	
-	/*
-	 * Skal det være sid eller uid? Hvis det er feil så er det fordi det skal stå uid. 
-	 */
+	
 	public Sporris findSporris(int sid) {
 		return em.find(Sporris.class, sid);
 	}
 	
-	public void updateUser(Sporris s) {
+	public void updateSporris(Sporris s) {
 		em.merge(s);
 	}
 	
-	/*
-	 * Samme potensielt idissue her. sid vs uid
-	 */
+	
 	public void removeUser(int sid) {
 		em.remove(em.find(User.class, sid));
 	}
