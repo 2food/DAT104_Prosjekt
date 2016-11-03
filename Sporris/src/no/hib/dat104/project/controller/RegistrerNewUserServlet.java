@@ -82,12 +82,12 @@ public class RegistrerNewUserServlet extends HttpServlet {
 			User user = new User();
 			user.setUser_name(username);
 			user.setUser_password(userpw);
-			int uid = GenerateID.userIDInt(userEAO);
-			user.setUid(uid);
+
 			userEAO.addUser(user);
 			// Legger til en login, true og username i session
-			SessionHelper.logInUser(request, user);
+			
 			response.sendRedirect(OVERSIKTURL);
+			SessionHelper.logInUser(request,user);
 		} else {
 			response.sendRedirect(NEWUSERURL);
 		}
