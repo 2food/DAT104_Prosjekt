@@ -19,7 +19,7 @@ public class RegistrerTest {
 	
 	@Test
 	public void usernameExistsTest(){
-		assertFalse(validator.usernameAlreadyExists("Per", userEAO));
+		assertFalse(validator.usernameAlreadyExists("Kalle", userEAO));
 	}
 	
 	@Test

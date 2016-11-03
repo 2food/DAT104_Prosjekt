@@ -63,6 +63,8 @@ public class RegistrerNewUserServlet extends HttpServlet {
 		registrerInfo.setValidUsername(RegisterValidator.isValidUsername(username));
 		registrerInfo.setUsernameExists(RegisterValidator.usernameAlreadyExists(username, userEAO));
 		registrerInfo.setPasswordsMatches(RegisterValidator.passwordsmatches(userpw, userpw2));
+		
+		System.out.println("do post");
 		System.out.println(registrerInfo.getUsername());
 		System.out.println(registrerInfo.getUserpassword1());
 		System.out.println(registrerInfo.getUserpassword2());
@@ -76,16 +78,15 @@ public class RegistrerNewUserServlet extends HttpServlet {
 		if (registrerInfo.isValidUsername() && !registrerInfo.isUsernameExists()
 				&& registrerInfo.isPasswordsMatches()) {
 
-			// Legger til en login, true og username i session
-			SessionHelper.logInUser(request);
-
 			// oppretter User og Legger til bruker i databasen
 			User user = new User();
 			user.setUser_name(username);
 			user.setUser_password(userpw);
 			int uid = GenerateID.userIDInt(userEAO);
 			user.setUid(uid);
-			
+			userEAO.addUser(user);
+			// Legger til en login, true og username i session
+			SessionHelper.logInUser(request, user);
 			response.sendRedirect(OVERSIKTURL);
 		} else {
 			response.sendRedirect(NEWUSERURL);

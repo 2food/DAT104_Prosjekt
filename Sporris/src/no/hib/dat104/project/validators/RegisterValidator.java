@@ -1,4 +1,6 @@
 package no.hib.dat104.project.validators;
+import java.util.List;
+
 /*
  * Validering av brukerinputt for registreringsskjema
  * @author Vegard
@@ -23,8 +25,14 @@ public class RegisterValidator {
 	 * @return true hvis brukernavn finnes
 	 */
 	public static boolean usernameAlreadyExists(String username, UserEAO UEAO){
-		// return UEAO.findUserByUserName(username)!= null
-		return false;
+		boolean nameExists =false;
+//		List<User> allUsers = UEAO.allUsers();
+//		for(User user : allUsers){
+//			if(username.equals(user.getUser_name())){
+//				nameExists = true;
+//			}
+//		}
+		return nameExists;
 	}
 	/*
 	 * Sjekker om bruker skriver inn 2 like passord
@@ -32,7 +40,7 @@ public class RegisterValidator {
 	 * @return true hvis passord er like
 	 */
 	public static boolean passwordsmatches(String pass1, String pass2){
-		return pass1.equals(pass2);
+		return pass1 != null && pass1.equals(pass2);
 	
 	}
 }
