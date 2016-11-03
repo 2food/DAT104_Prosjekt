@@ -34,23 +34,20 @@ public class UserTest extends HttpServlet {
 		for(User u : l) {
 			out.println(u.getUser_name() + "<br />");
 		}
-		out.print(seao.getNewId());
 		
-//		User u1 = new User();
-//		u1.setUid(10);
-//		u1.setUser_name("user2");
-//		u1.setUser_password("pass");
-//		u1.setSporrises(new ArrayList<Sporris>());
-//		
-//		Sporris s1 = new Sporris();
-//		s1.setActive(true);
-//		s1.setSid(10);
-//		s1.setSporris_name("hepp");
-//		s1.setSporris_tag("123qwe");
-//		s1.setSporris_user(u1);
-//		u1.getSporrises().add(s1);
-//		
-//		ueao.addUser(u1);  
+		User u1 = new User();
+		u1.setUser_name("user2");
+		u1.setUser_password("pass");
+		u1.setSporrises(new ArrayList<Sporris>());
+		
+		Sporris s1 = new Sporris();
+		s1.setActive(true);
+		s1.setSporris_name("hepp");
+		s1.setSporris_tag("123qwe");
+		s1.setSporris_user(u1);
+		u1.getSporrises().add(s1);
+		
+		ueao.addUser(u1);  
 	}
 
 
