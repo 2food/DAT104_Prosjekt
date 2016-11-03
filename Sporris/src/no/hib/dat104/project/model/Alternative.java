@@ -45,4 +45,15 @@ public class Alternative {
 		this.alternative_question = alternative_question;
 
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean eq = true;
+		if (!(obj instanceof Alternative)) eq = false;
+		else {
+			Alternative q = (Alternative) obj;
+			if (aid != q.getAid()) eq = false;
+		}
+		return eq;
+	}
 }
