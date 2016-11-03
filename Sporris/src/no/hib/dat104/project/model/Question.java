@@ -59,8 +59,22 @@ public class Question {
 	public void setAllow_text(boolean allow_text) {
 		this.allow_text = allow_text;
 	}
-	
-	
+	public List<Alternative> getAlternatives() {
+		return alternatives;
+	}
+	public void setAlternatives(List<Alternative> alternatives) {
+		this.alternatives = alternatives;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		boolean eq = true;
+		if (!(obj instanceof Question)) eq = false;
+		else {
+			Question q = (Question) obj;
+			if (qid != q.getQid()) eq = false;
+		}
+		return eq;
+	}
 	
 
 }
