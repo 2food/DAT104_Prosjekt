@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
 			oldsession.invalidate();
 		}
 		HttpSession session = request.getSession();
+		session.setAttribute("loggedin", false);
 		LoginJavaBean logininfo = new LoginJavaBean();
 		session.setAttribute("logininfo", logininfo);
 		request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
@@ -56,11 +57,10 @@ public class LoginServlet extends HttpServlet {
 		logininfo.setUsername(username);
 		logininfo.setPassword(password);
 		LoginValidator.validate(logininfo, ueao);
-//		logininfo.setValidUsername(LoginValidator.usernameValidator(username));
-//		logininfo.setValidPassword(LoginValidator.passwordValidator(password));
 		if (!logininfo.isValidUsername() || !logininfo.isValidPassword()) {
 			request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 		} else {
+			session.setAttribute("loggedin", true);
 			response.sendRedirect(OVERSIKTURL);
 		}
 	}

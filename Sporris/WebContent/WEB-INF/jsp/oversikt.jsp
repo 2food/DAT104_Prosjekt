@@ -8,6 +8,9 @@
 </head>
 <body>
 	<h1>Kontrollpanel for spørriser</h1>
+	<form action="oversikt" method="post">
+		<input type="submit" value="Logg ut">
+	</form>
 	<p>
 	
 	<table border="1">
