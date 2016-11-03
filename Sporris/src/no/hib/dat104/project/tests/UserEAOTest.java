@@ -52,19 +52,19 @@ public class UserEAOTest {
 
 	@Test
 	public void findUserIdTest() {
-		assertTrue(ueao.findUser(new Integer(0)).getUser_name().equals("admin"));
+		assertTrue(ueao.findUser(new Integer(10)).getUser_name().equals("admin"));
 	}
 	
 	@Test
 	public void FindUserNameTest() {
-		assertTrue(ueao.findUser("admin").getUid() == 0);
+		assertTrue(ueao.findUser("admin").getUid() == 10);
 	}
 	
 	@Test
 	public void addRemoveUserTest() {
 		ueao.addUser(d);
 		assertTrue(ueao.findUser("testusmaximus").getUid() == d.getUid());
-		ueao.removeUser(d.getUid());
+		ueao.removeUser(ueao.findUser("testusmaximus").getUid());
 		assertNull(ueao.findUser("testusmaximus"));
 	}
 
