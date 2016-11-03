@@ -21,7 +21,7 @@ public class SporrisEAO {
 	}
 
 	public List<Sporris> allSporris() {
-		TypedQuery<Sporris> query = em.createQuery("SELECT s FROM User s", Sporris.class);
+		TypedQuery<Sporris> query = em.createQuery("SELECT s FROM Sporris s", Sporris.class);
 		List<Sporris> q = query.getResultList();
 		return q;
 	}

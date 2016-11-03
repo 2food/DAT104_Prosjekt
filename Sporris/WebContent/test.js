@@ -1,17 +1,21 @@
 $(document).ready(function(){
-	var counter = 0;
+	var qCounter = 0;
+	var aCounter = 0;
     $('#questions').html(function(i, ot) {
 		return ot + newQuestionButton();
 	});
     
     $("body").on("click", ".add-alternative-button", function(){
-        $(this).parent().parent().append(newAlternative(counter++));
+		aCounter = newAId(aCounter);
+		qName = $(this).parent().parent().siblings('input').attr('name');
+        $(this).parent().parent().append(newAlternative(qName, aCounter));
         $(this).parent().parent().append(newAlternativeButton());
         $(this).parent().remove();
     });
     
     $("body").on("click", ".add-question-button", function(){
-        $(this).parent().parent().append(newQuestion(counter++));
+		qCounter = newQId(qCounter);
+        $(this).parent().parent().append(newQuestion(qCounter));
         $(this).parent().parent().append(newQuestionButton());
         $(this).parent().remove();
     });
@@ -20,7 +24,6 @@ $(document).ready(function(){
         $(this).toggle();
         $(this).siblings().toggle();
         $(this).parent().parent().find("li").toggle();
-        
     });
     
     $("body").on("click", "input.remove-parent", function(){
@@ -31,18 +34,29 @@ $(document).ready(function(){
     remove-parent
 });
 
+function newQId(qCounter) {
+	counter = qCounter +1;
+	$("#newQCounter").val(counter);
+	return counter;
+}
+function newAId(aCounter) {
+	counter = aCounter +1;
+	$("#newACounter").val(counter);
+	return counter;
+}
+
 function newQuestion(counter) {
 	var line = '<li class="question">';
     line += '<div class="extend-control"><input type="button" value="Lukk" class="button toggle-button"><input type="button" value="Utvid" class="button toggle-button" style="display:none"></div>';
-    line += '<div class="question-container">Sp&oslashrsm&aringl:<br /><input type="text" name="spid_' + counter + '">';
-    line += '<ul class="alternatives"><li class="alternative"><input type="checkbox" name ="fritekst_spid_' + counter + '" value="fritekst_spid_' + counter + '">Fritekst</li>';
+    line += '<div class="question-container">Sp&oslashrsm&aringl:<br /><input type="text" name="newQ_' + counter + '">';
+    line += '<ul class="alternatives"><li class="alternative"><input type="checkbox" name ="newQ_' + counter + '_text" value="newQ_' + counter + '_text">Fritekst</li>';
     line += newAlternativeButton();
     line += '</ul></div></li>';
     return line;
 }
 
-function newAlternative(counter) {
-    var line = '<li class="alternative">Alternativ#: <input type="text" name="aid_' + counter + '">';
+function newAlternative(qName, aCounter) {
+    var line = '<li class="alternative">Alternativ#: <input type="text" name="' + qName + '_aid_' + aCounter + '">';
     line += '<input class="remove-parent" type="button" value="X"></li>';
     return line;
 }
