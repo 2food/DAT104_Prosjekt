@@ -1,7 +1,7 @@
 package no.hib.dat104.project.javabeans;
 
 /*
- * JavaBean for Registrering av ny bruker
+ * JavaBean for registrerInfo
  * @author Vegard
  */
 public class RegistrerJavaBean {

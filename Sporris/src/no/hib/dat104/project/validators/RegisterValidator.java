@@ -26,12 +26,12 @@ public class RegisterValidator {
 	 */
 	public static boolean usernameAlreadyExists(String username, UserEAO UEAO){
 		boolean nameExists =false;
-//		List<User> allUsers = UEAO.allUsers();
-//		for(User user : allUsers){
-//			if(username.equals(user.getUser_name())){
-//				nameExists = true;
-//			}
-//		}
+		List<User> allUsers = UEAO.allUsers();
+		for(User user : allUsers){
+			if(username.equals(user.getUser_name())){
+				nameExists = true;
+			}
+		}
 		return nameExists;
 	}
 	/*

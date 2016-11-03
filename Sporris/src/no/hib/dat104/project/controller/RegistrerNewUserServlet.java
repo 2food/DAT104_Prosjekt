@@ -89,7 +89,7 @@ public class RegistrerNewUserServlet extends HttpServlet {
 			response.sendRedirect(OVERSIKTURL);
 			SessionHelper.logInUser(request,user);
 		} else {
-			response.sendRedirect(NEWUSERURL);
+			request.getRequestDispatcher("WEB-INF/jsp/registerNewUser.jsp").forward(request, response);
 		}
 
 	}
