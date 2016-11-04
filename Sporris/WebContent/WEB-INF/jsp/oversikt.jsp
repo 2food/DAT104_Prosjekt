@@ -1,3 +1,5 @@
+<%@ page
+	import="static no.hib.dat104.project.controller.UrlMappings.OVERSIKTURL"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,10 +28,12 @@
 		<tr>
 			<td>1</td>
 			<td>Spørris1</td>
-			<td><input type="submit" value="aktiver"></td>
-			<td><input type="submit" value="statistikk"></td>
-			<td><input type="submit" value="rediger"></td>
-			<td><input type="submit" value="slett"></td>
+			<td> <form action ="<%=OVERSIKTURL%>" method = "post">
+			<input type ="hidden" name ="sporrisID" value = "123">
+			<input type="submit" name ="activate" value="Aktiver"> </form></td>
+			<td><input type="submit" name ="statictics" value="Statistikk"></td>
+			<td><input type="submit" name ="edit" value="Rediger"></td>
+			<td><input type="submit" name ="delete" value="Slett"></td>
 		</tr>
 		<tr>
 			<td>2</td>

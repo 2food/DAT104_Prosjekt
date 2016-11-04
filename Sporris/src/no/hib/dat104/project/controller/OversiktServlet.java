@@ -46,27 +46,34 @@ public class OversiktServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String sporrisId = request.getParameter("sporrisID");
+		System.out.println("Fikk parameter sporrisID: " + sporrisId );
 		int sporrisIDAsInt = Integer.parseInt(sporrisId);
+		System.out.println("Konveterer parameter sporrisIDAsInt: " + sporrisIDAsInt );
+		
 		String buttonEdit = request.getParameter("edit");
 		String buttonDelete = request.getParameter("delete");
 		String buttonActivate = request.getParameter("activate");
+		System.out.println("Fikk parameter activate: " + buttonActivate);
 		
 		
 		
-		if(buttonEdit.equals("edit")){
+		if(buttonEdit.equals("Rediger")){
 			
 			session.setAttribute("sporrisId", sporrisId);
 			request.getRequestDispatcher("WEB-INF/jsp.SporrisRediger").forward(request, response);
 			
 		}
 		
-		if(buttonDelete.equals("delete")){
+		if(buttonDelete.equals("Slett")){
 				sporrisEAO.removeSporris(sporrisIDAsInt);
 				response.sendRedirect(OVERSIKTURL);
 			}
 		
-		if(buttonActivate.equals("activate")){
-			sporrisEAO.activateSporris(sporrisIDAsInt);
+		
+		if(buttonActivate.equals("Aktiver")){
+			System.out.println("knappen er trykket på");
+			System.out.println(sporrisId);
+			//sporrisEAO.activateSporris(sporrisIDAsInt);
 			response.sendRedirect(OVERSIKTURL);
 		}
 		
