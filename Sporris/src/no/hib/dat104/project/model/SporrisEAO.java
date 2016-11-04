@@ -44,6 +44,16 @@ public class SporrisEAO {
 	}
 	
 	
+	/*
+	 * Aktiverer en spørris
+	 * @Param spørrisId
+	 */
+	public void activateSporris(int sid){
+		findSporris(sid).setActive(true);
+		updateSporris(findSporris(sid));
+	}
+	
+	
 	public void removeSporris(int sid) {
 		em.remove(em.find(User.class, sid));
 	}
