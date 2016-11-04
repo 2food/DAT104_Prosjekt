@@ -33,11 +33,7 @@ public class OversiktServlet extends HttpServlet {
 		}
 	}
 	
-	/*
-	 * "Logger ut" Invaliderer sesjonen og redirecter til innlogging.
-	 * 
-	 * @author Tormod
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
