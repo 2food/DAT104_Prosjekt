@@ -15,14 +15,14 @@
 			<legend>Login</legend>
 			<p>
 				Brukernavn <input type="text" name="username"
-					value="${logininfo.username}">
-					<span id="wrongUsername">${logininfo.validUsername ? " " : "<font color='red'>Brukernavn er ikke registrert.</font>" }</span>
+					value="${login.username}">
+					<span id="wrongUsername">${login.validUsername ? " " : "<font color='red'>Brukernavn er ikke registrert.</font>" }</span>
 			</p>
 			
 			<p>
 				Passord: <input type="password" name="password"
-					value="${logininfo.password}" />
-					<span id="wrongPassword">${logininfo.validUsername && !logininfo.validPassword ? "<font color='red'>Passord passer ikke til brukernavn.</font>" : " " }</span>
+					value="${login.password}" />
+					<span id="wrongPassword">${login.validUsername && !login.validPassword ? "<font color='red'>Passord passer ikke til brukernavn.</font>" : " " }</span>
 			</p>
 			
 			<p>

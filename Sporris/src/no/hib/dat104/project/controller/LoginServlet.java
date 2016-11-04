@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
 	private UserEAO ueao;
 	/*
 	 * doGet-metode for LoginServlet. Invaliderer session hvis den eksisterer og
-	 * oppretter ny. Oppretter LoginJavaBean for logininfo. Forwarder til
+	 * oppretter ny. Oppretter LoginJavaBean for login. Forwarder til
 	 * login.jsp.
 	 * 
 	 * @author Tormod
@@ -38,26 +38,22 @@ public class LoginServlet extends HttpServlet {
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("loggedin", false);
-		LoginJavaBean logininfo = new LoginJavaBean();
-		session.setAttribute("logininfo", logininfo);
+		LoginJavaBean login = new LoginJavaBean();
+		session.setAttribute("login", login);
 		request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 	}
 
-	/*
-	 * Tar parametre fra innlogging og setter de i LoginaJavaBean.
-	 * Sjekker om login er gyldig
-	 * @author Tormod
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
-		LoginJavaBean logininfo = (LoginJavaBean) session.getAttribute("logininfo");
-		logininfo.setUsername(username);
-		logininfo.setPassword(password);
-		LoginValidator.validate(logininfo, ueao);
-		if (!logininfo.isValidUsername() || !logininfo.isValidPassword()) {
+		LoginJavaBean login = (LoginJavaBean) session.getAttribute("login");
+		login.setUsername(username);
+		login.setPassword(password);
+		LoginValidator.validate(login, ueao);
+		if (!login.isValidUsername() || !login.isValidPassword()) {
 			request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 		} else {
 			session.setAttribute("loggedin", true);
