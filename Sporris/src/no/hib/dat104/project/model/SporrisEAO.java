@@ -44,7 +44,7 @@ public class SporrisEAO {
 	}
 	
 	
-	public void removeUser(int sid) {
+	public void removeSporris(int sid) {
 		em.remove(em.find(User.class, sid));
 	}
 	
