@@ -13,6 +13,7 @@
 	<form action="oversikt" method="post">
 		<input type="submit" value="Logg ut">
 	</form>
+	<form action ="<%=OVERSIKTURL%>" method = "post">
 	<p>
 	
 	<table border="1">
@@ -28,12 +29,18 @@
 		<tr>
 			<td>1</td>
 			<td>Spørris1</td>
-			<td> <form action ="<%=OVERSIKTURL%>" method = "post">
+			<td> 
 			<input type ="hidden" name ="sporrisID" value = "123">
-			<input type="submit" name ="activate" value="Aktiver"> </form></td>
-			<td><input type="submit" name ="statictics" value="Statistikk"></td>
-			<td><input type="submit" name ="edit" value="Rediger"></td>
-			<td><input type="submit" name ="delete" value="Slett"></td>
+			<input type="submit" name ="activate" value="Aktiver"> </td>
+			<td>
+			<input type = "hidden" name = "sporrisID" value = "123">
+			<input type="submit" name ="statictics" value="Statistikk"></td>
+			<td>
+			<input type = "hidden" name = "sporrisID" value = "123">
+			<input type="submit" name ="activate" value="Rediger"></td>
+			<td>
+			<input type = "hidden" name = "sporrisID" value ="123">
+			<input type="submit" name ="activate" value="Slett"> </td>
 		</tr>
 		<tr>
 			<td>2</td>
@@ -44,7 +51,7 @@
 			<td><input type="submit" value="slett"></td>
 		</tr>
 	</table>
-	
+	 </form>
 	<p> <a href="/Sporris/leggtil.html">Legg Til Spørris</a></p>
 </body>
 </html>
