@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import no.hib.dat104.project.model.User;
 
 @Stateless
 public class UserEAO {
@@ -41,7 +42,7 @@ public class UserEAO {
 		List<User> list = allUsers();
 		for (User u : list) {
 			if (u.getUser_name().equals(username)) {
-				user = u;
+				user = findUser(u.getUid());
 			}
 		}
 		return user;

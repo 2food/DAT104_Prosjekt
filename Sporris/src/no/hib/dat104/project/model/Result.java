@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class Result {
 	@JoinColumn(name="result_sporris", referencedColumnName="sid")
 	private Sporris result_sporris;
 	
-	@OneToMany(mappedBy = "response_result", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "response_result", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Response> responses;
 	
 	public int getRid() {
