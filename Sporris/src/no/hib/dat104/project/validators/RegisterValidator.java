@@ -20,6 +20,17 @@ public class RegisterValidator {
 		return valid;
 	}
 	/*
+	 * Validerer passord
+	 */
+	public static boolean isValidPassword(String password){
+		boolean validp = true;
+		if(password.length() < 1){
+			validp = false;
+		}
+		return validp;
+	}
+	
+	/*
 	 * Sjekker om brukernavn allerede er i bruk
 	 * @param username, UserEAO
 	 * @return true hvis brukernavn finnes

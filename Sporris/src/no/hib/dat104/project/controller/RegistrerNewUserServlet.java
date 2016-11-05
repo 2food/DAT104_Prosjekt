@@ -63,6 +63,7 @@ public class RegistrerNewUserServlet extends HttpServlet {
 		registrerInfo.setValidUsername(RegisterValidator.isValidUsername(username));
 		registrerInfo.setUsernameExists(RegisterValidator.usernameAlreadyExists(username, userEAO));
 		registrerInfo.setPasswordsMatches(RegisterValidator.passwordsmatches(userpw, userpw2));
+		registrerInfo.setValidPassword(RegisterValidator.isValidPassword(userpw));
 		
 		System.out.println("do post");
 		System.out.println(registrerInfo.getUsername());
@@ -71,11 +72,12 @@ public class RegistrerNewUserServlet extends HttpServlet {
 
 		System.out.println(registrerInfo.isUsernameExists());
 		System.out.println(registrerInfo.isValidUsername());
+		System.out.println(registrerInfo.isValidPassword());
 		System.out.println(registrerInfo.isPasswordsMatches());
 
 		// Logger inn og går til oversiktssiden hvis registreringsinfo er gyldig
 		// henter siden på nytt hvis inpyt ikke er gyldig og viser feilmeldinger
-		if (registrerInfo.isValidUsername() && !registrerInfo.isUsernameExists()
+		if (registrerInfo.isValidUsername() && registrerInfo.isValidPassword() && !registrerInfo.isUsernameExists()
 				&& registrerInfo.isPasswordsMatches()) {
 
 			// oppretter User og Legger til bruker i databasen
@@ -85,9 +87,9 @@ public class RegistrerNewUserServlet extends HttpServlet {
 
 			userEAO.addUser(user);
 			// Legger til en login, true og username i session
-			
+			session.setAttribute("loggedin", true);
 			response.sendRedirect(OVERSIKTURL);
-			SessionHelper.logInUser(request,user);
+			
 		} else {
 			request.getRequestDispatcher("WEB-INF/jsp/registerNewUser.jsp").forward(request, response);
 		}

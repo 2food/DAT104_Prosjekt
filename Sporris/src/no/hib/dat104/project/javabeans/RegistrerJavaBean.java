@@ -10,19 +10,21 @@ public class RegistrerJavaBean {
 	private String userpassword1;
 	private String userpassword2;
 	private boolean validUsername;
+	private boolean validPassword;
 	private boolean usernameExists;
 	private boolean passwordsMatches;
 
 	public RegistrerJavaBean() {
-		this(null, null, null, true, false, true);
+		this(null, null, null, true, true, false, true);
 	}
 
-	public RegistrerJavaBean(String username, String userpassword1, String userpassword2, boolean validUsername,
+	public RegistrerJavaBean(String username, String userpassword1, String userpassword2, boolean validUsername,boolean validPassword,
 			boolean usernameExists, boolean passwordsMatches) {
 		this.username = username;
 		this.userpassword1 = userpassword1;
 		this.userpassword2 = userpassword2;
 		this.validUsername = validUsername;
+		this.validPassword = validPassword;
 		this.usernameExists = usernameExists;
 		this.passwordsMatches = passwordsMatches;
 	}
@@ -58,6 +60,14 @@ public class RegistrerJavaBean {
 
 	public void setValidUsername(boolean validUsername) {
 		this.validUsername = validUsername;
+	}
+	
+	public boolean isValidPassword(){
+		return validPassword;
+	}
+	
+	public void setValidPassword(boolean validPassword) {
+		this.validPassword = validPassword;
 	}
 
 	public boolean isUsernameExists() {
