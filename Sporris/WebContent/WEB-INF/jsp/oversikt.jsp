@@ -27,19 +27,27 @@
 			<th>slett</th>
 		</tr>
 
-		<c:forEach items="${user.sporrises}" var="i">
+		<c:forEach items="${user.sporrises}" var="s">
 			<tr>
-				<td>${i.sid}</td>
-				<td>${i.sporris_name}</td>
+				<td>${s.sid}</td>
+				<td>${s.sporris_name}</td>
 
-				<td><input type="hidden" name="sporrisID" value="${i.sid}">
-					<input type="submit" name="activate" value="Aktiver"></td>
-				<td><input type="hidden" name="sporrisID" value="${i.sid}">
-					<input type="submit" name="statictics" value="Statistikk"></td>
-				<td><input type="hidden" name="sporrisID" value="${i.sid}">
-					<input type="submit" name="activate" value="Rediger"></td>
-				<td><input type="hidden" name="sporrisID" value="${i.sid}">
-					<input type="submit" name="activate" value="Slett"></td>
+				<td><form action="oversikt" method="post">
+						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
+							type="submit" name="activate" value="${s.active ? 'Deaktiver ' : 'Aktiver' }">
+					</form></td>
+				<td><form action="oversikt" method="post">
+						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
+							type="submit" name="statictics" value="Statistikk">
+					</form></td>
+				<td><form action="oversikt" method="post">
+						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
+							type="submit" name="edit" value="Rediger">
+					</form></td>
+				<td><form action="oversikt" method="post">
+						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
+							type="submit" name="delete" value="Slett">
+					</form></td>
 
 			</tr>
 		</c:forEach>
