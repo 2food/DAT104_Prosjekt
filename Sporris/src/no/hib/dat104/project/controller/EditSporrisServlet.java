@@ -24,7 +24,7 @@ import no.hib.dat104.project.model.UserEAO;
  */
 @WebServlet("/edit")
 public class EditSporrisServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; 
     
 
 	@EJB
