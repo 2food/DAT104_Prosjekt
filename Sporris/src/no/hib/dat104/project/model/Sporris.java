@@ -24,7 +24,7 @@ public class Sporris {
 	private String sporris_tag;
 	private boolean active;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
     @JoinColumn(name="sporris_user", referencedColumnName = "uid")
     private User sporris_user;
 
@@ -64,6 +64,8 @@ public class Sporris {
 	public void setSporris_user(User sporris_user) {
 		this.sporris_user = sporris_user;
 	}
+	
+	
 	public List<Question> getQuestions() {
 		return questions;
 	}

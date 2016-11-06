@@ -20,7 +20,7 @@ public class Question {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int qid;
 	private String question_text;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="question_sporris", referencedColumnName = "sid")
 	private Sporris question_sporris;
 	private boolean allow_multiple;
