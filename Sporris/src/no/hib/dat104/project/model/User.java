@@ -21,7 +21,7 @@ public class User {
 	private String user_name;
 	private String user_password;
 	
-	@OneToMany(mappedBy = "sporris_user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "sporris_user", cascade = CascadeType.ALL)
 	private List<Sporris> sporrises;
 	
 	

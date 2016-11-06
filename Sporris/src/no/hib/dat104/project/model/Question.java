@@ -27,7 +27,7 @@ public class Question {
 	private boolean allow_multiple;
 	private boolean allow_text;
 	
-	@OneToMany(mappedBy = "alternative_question", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "alternative_question", cascade = CascadeType.ALL)
 	private List<Alternative> alternatives;
 	
 	public int getQid() {
