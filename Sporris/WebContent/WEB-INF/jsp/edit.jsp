@@ -6,9 +6,9 @@
 
 
 <head>
-<link rel="stylesheet" type="text/css" href="style.css">
-<script src="jquery-3.1.1.js"> </script>
-<script src="test.js"> </script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="javascript/jquery-3.1.1.js"> </script>
+<script src="javascript/test.js"> </script>
 
 
 <c:set var="checked" scope="page" value="checked"/>
