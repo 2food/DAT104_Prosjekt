@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class Question {
 	private boolean allow_multiple;
 	private boolean allow_text;
 	
-	@OneToMany(mappedBy = "alternative_question", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "alternative_question", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Alternative> alternatives;
 	
 	public int getQid() {

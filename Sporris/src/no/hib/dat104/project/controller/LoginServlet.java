@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import no.hib.dat104.project.javabeans.LoginJavaBean;
+import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
 import no.hib.dat104.project.validators.LoginValidator;
 
@@ -57,6 +58,7 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 		} else {
 			session.setAttribute("loggedin", true);
+			session.setAttribute("user", (User) ueao.findUser(login.getUsername())); 
 			response.sendRedirect(OVERSIKTURL);
 		}
 	}

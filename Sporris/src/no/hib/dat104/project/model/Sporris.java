@@ -1,9 +1,11 @@
 package no.hib.dat104.project.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +17,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(schema = "sporris_database", name = "sporris")
-public class Sporris {
+public class Sporris implements Serializable{
+	private static final long serialVersionUID = 5356895219389998211L;
 	
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
@@ -28,10 +31,10 @@ public class Sporris {
     @JoinColumn(name="sporris_user", referencedColumnName = "uid")
     private User sporris_user;
 
-	@OneToMany(mappedBy = "question_sporris", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "question_sporris", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Question> questions;
 	
-	@OneToMany(mappedBy = "result_sporris", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "result_sporris", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Result> results;
 	
 	public int getSid() {
