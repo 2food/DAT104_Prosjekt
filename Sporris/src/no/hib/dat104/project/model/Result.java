@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Result {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int rid;
 	private String result_name;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="result_sporris", referencedColumnName="sid")
 	private Sporris result_sporris;
 	

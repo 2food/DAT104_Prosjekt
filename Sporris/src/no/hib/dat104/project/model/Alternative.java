@@ -17,7 +17,7 @@ public class Alternative {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int aid;
 	private String alternative_text;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "alternative_question", referencedColumnName = "qid")
 	private Question alternative_question;
 

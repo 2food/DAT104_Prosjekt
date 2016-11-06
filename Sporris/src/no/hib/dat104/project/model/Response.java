@@ -17,7 +17,7 @@ public class Response {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int response_id;
 	private String response_text;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "response_result", referencedColumnName = "rid")
 	private Result response_result;
 

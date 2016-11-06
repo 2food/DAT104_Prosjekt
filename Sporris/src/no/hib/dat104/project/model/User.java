@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +33,22 @@ public class User {
 	}
 	public String getUser_name() {
 		return user_name;
+	}
+	/**
+	 * returns a users sporris by id
+	 * @param sid
+	 * @return sporris
+	 * @author Torstein
+	 */
+	public Sporris getSporris(int sid) {
+		Sporris s = null;
+		for (Sporris i : sporrises) {
+			if (i.getSid() == sid) {
+				s = i;
+				break;
+			}
+		}
+		return s;
 	}
 	public List<Sporris> getSporrises() {
 		return sporrises;

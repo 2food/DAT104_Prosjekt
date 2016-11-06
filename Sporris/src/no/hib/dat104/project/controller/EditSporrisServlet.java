@@ -24,26 +24,37 @@ import no.hib.dat104.project.model.UserEAO;
  */
 @WebServlet("/edit")
 public class EditSporrisServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; 
     
-	
+
 	@EJB
 	private UserEAO ueao;
-	
-	
-	User user;
-	Sporris sporris;
-	
+	int userId;
+	int sporrisId;
+
 	public void init() {
-		user = makeDummyUser();
-		sporris = user.getSporrises().get(0);
 		
 	}
 	
 	
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Question> qlist = sporris.getQuestions();
+		User user;
+		HttpSession session = request.getSession();
+		
+		// TODO sync w/ overview
+		request.setAttribute("sporrisId", 100);
+		request.setAttribute("userId", 100);
+		
+		userId = (Integer) request.getAttribute("userId");
+		sporrisId = (Integer) request.getAttribute("sporrisId");
+		if(session.getAttribute("user") == null || session.getAttribute("user").getClass().equals(User.class)) {
+			user = ueao.findUserCascade(userId);
+			session.setAttribute("user", user);			
+		} else {
+			user = (User) session.getAttribute("user");
+		}
+		List<Question> qlist = ueao.findSporrisCascade(sporrisId).getQuestions();
 		request.setAttribute("qlist", qlist);
 		request.getRequestDispatcher("WEB-INF/jsp/edit.jsp").forward(request, response);
 	}
@@ -52,6 +63,22 @@ public class EditSporrisServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user;
+		Sporris sporris;
+		HttpSession session = request.getSession();
+		
+		// TODO sync w/ overview
+		request.setAttribute("sporrisId", 100);
+		request.setAttribute("userId", 100);
+		
+		userId = (Integer) request.getAttribute("userId");
+		if(session.getAttribute("user") == null || session.getAttribute("user").getClass().equals(User.class)) {
+			user = ueao.findUserCascade(userId);
+			session.setAttribute("user", user);			
+		} else {
+			user = (User) session.getAttribute("user");
+		}
+		sporris = user.getSporris(sporrisId);
 		
 		PrintWriter out = response.getWriter();
 		
@@ -68,22 +95,24 @@ public class EditSporrisServlet extends HttpServlet {
 					newQ.setQuestion_text(request.getParameter("newQ_" + q));
 					newQ.setAllow_multiple(true);
 					newQ.setAllow_text(Boolean.getBoolean(request.getParameter("newQ_" + q + "_text")));
-					newQ.setQid(20); //TODO generate
 					newQ.setQuestion_sporris(sporris);
 					newQ.setAlternatives(new ArrayList<Alternative>());
 					for (int a = 0; a <= newACounter; a++) {
 						if (request.getParameter("newQ_" + q + "_aid_" + a) != null) {
 							newA = new Alternative();
-							newA.setAid(20); //TODO generate
 							newA.setAlternative_question(newQ);
 							newA.setAlternative_text(request.getParameter("newQ_" + q + "_aid_" + a));
-							newQ.getAlternatives().add(newA);							
+							newQ.getAlternatives().add(newA);	
+
+							System.out.println("added alt");
 						}
 					}
-					sporris.getQuestions().add(newQ); 
-					
+					sporris.getQuestions().add(newQ);
+					System.out.println("added q");
 				}
 			}
+			System.out.println(user.getSporrises().get(0).getQuestions().size());
+			ueao.updateUser(user);
 			
 			
 			doGet(request, response);
