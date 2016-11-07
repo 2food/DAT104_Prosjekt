@@ -40,22 +40,27 @@ public class EditSporrisServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user;
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession();  
 		
 		// TODO sync w/ overview
-		request.setAttribute("sporrisId", 100);
-		request.setAttribute("userId", 100);
+		if (session.getAttribute("userId") == null || session.getAttribute("sporrisId") == null) {
+			session.setAttribute("sporrisId", 100);
+			session.setAttribute("userId", 100);
+			System.out.println("neeeei");
+		}
+		userId = (Integer) session.getAttribute("userId");
+		sporrisId = (Integer) session.getAttribute("sporrisId");
 		
-		userId = (Integer) request.getAttribute("userId");
-		sporrisId = (Integer) request.getAttribute("sporrisId");
 		if(session.getAttribute("user") == null || session.getAttribute("user").getClass().equals(User.class)) {
 			user = ueao.findUserCascade(userId);
 			session.setAttribute("user", user);			
 		} else {
 			user = (User) session.getAttribute("user");
 		}
-		List<Question> qlist = ueao.findSporrisCascade(sporrisId).getQuestions();
+		Sporris sporris = ueao.findSporrisCascade(sporrisId);
+		List<Question> qlist = sporris.getQuestions();
 		request.setAttribute("qlist", qlist);
+		request.setAttribute("sporrisName", sporris.getSporris_name());
 		request.getRequestDispatcher("WEB-INF/jsp/edit.jsp").forward(request, response);
 	}
 
@@ -65,13 +70,16 @@ public class EditSporrisServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user;
 		Sporris sporris;
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); 
 		
 		// TODO sync w/ overview
-		request.setAttribute("sporrisId", 100);
-		request.setAttribute("userId", 100);
-		
-		userId = (Integer) request.getAttribute("userId");
+		if (session.getAttribute("userId") == null || session.getAttribute("sporrisId") == null) {
+			session.setAttribute("sporrisId", 100);
+			session.setAttribute("userId", 100);
+			System.out.println("neeeei");
+		}
+		userId = (Integer) session.getAttribute("userId");
+		sporrisId = (Integer) session.getAttribute("sporrisId");
 		if(session.getAttribute("user") == null || session.getAttribute("user").getClass().equals(User.class)) {
 			user = ueao.findUserCascade(userId);
 			session.setAttribute("user", user);			
@@ -80,12 +88,20 @@ public class EditSporrisServlet extends HttpServlet {
 		}
 		sporris = user.getSporris(sporrisId);
 		
-		PrintWriter out = response.getWriter();
+		if (request.getParameter("sporrisName") != null) {
+			sporris.setSporris_name(request.getParameter("sporrisName"));
+			if (sporris.getSporris_name().length() == 0) {
+				sporris.setSporris_name("Sporris uten navn");
+			}
+		} else {
+			sporris.setSporris_name("Sporris uten navn");
+		}
 		
 		if (request.getParameter("newQCounter") != null && request.getParameter("newACounter") != null ) {
 			// TODO type exception!!!!
 			int newQCounter = Integer.parseInt(request.getParameter("newQCounter"));
 			int newACounter = Integer.parseInt(request.getParameter("newACounter"));
+			
 			
 			Question newQ;
 			Alternative newA;
@@ -94,7 +110,9 @@ public class EditSporrisServlet extends HttpServlet {
 					newQ = new Question();
 					newQ.setQuestion_text(request.getParameter("newQ_" + q));
 					newQ.setAllow_multiple(true);
-					newQ.setAllow_text(Boolean.getBoolean(request.getParameter("newQ_" + q + "_text")));
+					newQ.setAllow_text(request.getParameter("newQ_" + q + "_text").equals("on") ? true : false);
+					System.out.println(request.getParameter("newQ_" + q + "_text"));
+					System.out.println(newQ.isAllow_text());
 					newQ.setQuestion_sporris(sporris);
 					newQ.setAlternatives(new ArrayList<Alternative>());
 					for (int a = 0; a <= newACounter; a++) {
@@ -104,14 +122,16 @@ public class EditSporrisServlet extends HttpServlet {
 							newA.setAlternative_text(request.getParameter("newQ_" + q + "_aid_" + a));
 							newQ.getAlternatives().add(newA);	
 
-							System.out.println("added alt");
+//							System.out.println("added alt");
 						}
 					}
-					sporris.getQuestions().add(newQ);
-					System.out.println("added q");
+					if (!sporris.contains(newQ)) {
+						sporris.getQuestions().add(newQ);						
+					}
+//					System.out.println("added q");
 				}
 			}
-			System.out.println(user.getSporrises().get(0).getQuestions().size());
+//			System.out.println(user.getSporrises().get(0).getQuestions().size());
 			ueao.updateUser(user);
 			
 			
@@ -125,70 +145,70 @@ public class EditSporrisServlet extends HttpServlet {
 		
 	}
 	
-	/**
-	 * 
-	 * @return a static user
-	 */
-	private User makeDummyUser() {
-		User u1 = new User();
-		u1.setUid(10);
-		u1.setUser_name("user2");
-		u1.setUser_password("pass");
-		u1.setSporrises(new ArrayList<Sporris>());
-
-		Sporris s1 = new Sporris();
-		s1.setActive(true);
-		s1.setSid(10);
-		s1.setSporris_name("hepp");
-		s1.setSporris_tag("123qwe");
-		s1.setSporris_user(u1);
-		s1.setQuestions(new ArrayList<Question>());
-		
-		Question q1 = new Question();
-		q1.setAllow_multiple(true);
-		q1.setAllow_text(true);
-		q1.setQid(10);
-		q1.setQuestion_sporris(s1);
-		q1.setQuestion_text("Heter du geir?");
-		q1.setAlternatives(new ArrayList<Alternative>());
-		
-		Alternative a1 = new Alternative();
-		a1.setAid(10);
-		a1.setAlternative_question(q1);
-		a1.setAlternative_text("Ja");
-		
-		Alternative a2 = new Alternative();
-		a2.setAid(11);
-		a2.setAlternative_question(q1);
-		a2.setAlternative_text("Nei");
-		
-		Question q2 = new Question();
-		q2.setAllow_multiple(true);
-		q2.setAllow_text(false);
-		q2.setQid(20);
-		q2.setQuestion_sporris(s1);
-		q2.setQuestion_text("Heter du trine?");
-		q2.setAlternatives(new ArrayList<Alternative>());
-		
-		Alternative a3 = new Alternative();
-		a3.setAid(20);
-		a3.setAlternative_question(q2);
-		a3.setAlternative_text("Ja");
-		
-		Alternative a4 = new Alternative();
-		a4.setAid(21);
-		a4.setAlternative_question(q2);
-		a4.setAlternative_text("Nei");
-
-		q1.getAlternatives().add(a1);
-		q1.getAlternatives().add(a2);
-		q2.getAlternatives().add(a3);
-		q2.getAlternatives().add(a4);
-		s1.getQuestions().add(q1);
-		s1.getQuestions().add(q2);
-		u1.getSporrises().add(s1);
-		
-		return u1;
-	}
+//	/**
+//	 * 
+//	 * @return a static user
+//	 */
+//	private User makeDummyUser() {
+//		User u1 = new User();
+//		u1.setUid(10);
+//		u1.setUser_name("user2");
+//		u1.setUser_password("pass");
+//		u1.setSporrises(new ArrayList<Sporris>());
+//
+//		Sporris s1 = new Sporris();
+//		s1.setActive(true);
+//		s1.setSid(10);
+//		s1.setSporris_name("hepp");
+//		s1.setSporris_tag("123qwe");
+//		s1.setSporris_user(u1);
+//		s1.setQuestions(new ArrayList<Question>());
+//		
+//		Question q1 = new Question();
+//		q1.setAllow_multiple(true);
+//		q1.setAllow_text(true);
+//		q1.setQid(10);
+//		q1.setQuestion_sporris(s1);
+//		q1.setQuestion_text("Heter du geir?");
+//		q1.setAlternatives(new ArrayList<Alternative>());
+//		
+//		Alternative a1 = new Alternative();
+//		a1.setAid(10);
+//		a1.setAlternative_question(q1);
+//		a1.setAlternative_text("Ja");
+//		
+//		Alternative a2 = new Alternative();
+//		a2.setAid(11);
+//		a2.setAlternative_question(q1);
+//		a2.setAlternative_text("Nei");
+//		
+//		Question q2 = new Question();
+//		q2.setAllow_multiple(true);
+//		q2.setAllow_text(false);
+//		q2.setQid(20);
+//		q2.setQuestion_sporris(s1);
+//		q2.setQuestion_text("Heter du trine?");
+//		q2.setAlternatives(new ArrayList<Alternative>());
+//		
+//		Alternative a3 = new Alternative();
+//		a3.setAid(20);
+//		a3.setAlternative_question(q2);
+//		a3.setAlternative_text("Ja");
+//		
+//		Alternative a4 = new Alternative();
+//		a4.setAid(21);
+//		a4.setAlternative_question(q2);
+//		a4.setAlternative_text("Nei");
+//
+//		q1.getAlternatives().add(a1);
+//		q1.getAlternatives().add(a2);
+//		q2.getAlternatives().add(a3);
+//		q2.getAlternatives().add(a4);
+//		s1.getQuestions().add(q1);
+//		s1.getQuestions().add(q2);
+//		u1.getSporrises().add(s1);
+//		
+//		return u1;
+//	}
 
 }
