@@ -1,11 +1,11 @@
 package no.hib.dat104.project.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,6 +36,23 @@ public class Sporris implements Serializable{
 	
 	@OneToMany(mappedBy = "result_sporris", cascade = CascadeType.ALL)
 	private List<Result> results;
+	
+	public Sporris() {
+		
+	}
+	
+	/**
+	 * sets all NOT NULL values to some defaults
+	 */
+	public Sporris(User owner) {
+		sporris_name = "Ny Spørris";
+		sporris_tag = "qwe123";
+		sporris_user = owner;
+		active = true;
+		questions = new ArrayList<Question>();
+		results = new ArrayList<Result>();
+		
+	}
 	
 	public int getSid() {
 		return sid;
@@ -80,6 +97,18 @@ public class Sporris implements Serializable{
 	}
 	public void setResults(List<Result> results) {
 		this.results = results;
+	}
+	
+	
+	public boolean contains(Question q) {
+		boolean c = false;
+		for (Question q1 : questions) {
+			if (q1.contentEquals(q)) {
+				c = true;
+				break;
+			}
+		}
+		return c;
 	}
 	
 }

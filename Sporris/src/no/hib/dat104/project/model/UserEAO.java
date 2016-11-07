@@ -116,8 +116,6 @@ public class UserEAO {
 		return al;
 	}
 	
-
-	
 	
 	
 	public User findUser(Integer uid) {
@@ -155,6 +153,14 @@ public class UserEAO {
 	
 	public EntityTransaction getTransaction() {
 		return em.getTransaction();
+	}
+	
+	public void addSporris(Sporris s) {
+		em.persist(s);
+	}
+	
+	public void updateSporris(Sporris s) {
+		em.merge(s);
 	}
 	
 	public void addQuestion(Question q) {

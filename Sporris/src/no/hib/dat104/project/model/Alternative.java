@@ -45,6 +45,17 @@ public class Alternative {
 		this.alternative_question = alternative_question;
 
 	}
+	
+	/**
+	 * checks if content equals
+	 * @param a
+	 * @return
+	 */
+	public boolean contentEquals(Alternative a) {
+		boolean eq;
+		eq = alternative_text.equals(a.getAlternative_text());
+		return eq;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

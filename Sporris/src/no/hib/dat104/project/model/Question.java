@@ -66,6 +66,33 @@ public class Question {
 	public void setAlternatives(List<Alternative> alternatives) {
 		this.alternatives = alternatives;
 	}
+	
+	/**
+	 * checks if content equals
+	 * @param q
+	 * @return
+	 */
+	public boolean contentEquals(Question q) {
+		boolean eq = true;
+		if (!question_text.equals(q.getQuestion_text())) {
+			eq = false;
+		} else if (alternatives.size() != q.getAlternatives().size()) {
+			eq = false;
+		} else if (allow_text != q.isAllow_text()) {
+			eq = false;
+		} else if (allow_multiple != q.isAllow_multiple()) {
+			eq = false;
+		} else {
+			for (int i = 0; i < alternatives.size(); i++) {
+				if (!alternatives.get(i).contentEquals(q.getAlternatives().get(i))) {
+					eq = false;
+					break;
+				}
+			}
+		}
+		return eq;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		boolean eq = true;

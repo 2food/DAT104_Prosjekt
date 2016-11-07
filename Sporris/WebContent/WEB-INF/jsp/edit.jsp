@@ -8,7 +8,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <script src="javascript/jquery-3.1.1.js"> </script>
-<script src="javascript/test.js"> </script>
+<script src="javascript/sporris.js"> </script>
 
 
 <c:set var="checked" scope="page" value="checked"/>
@@ -25,14 +25,14 @@
 	<input id="newACounter" type="hidden" name="newACounter" value="0">
 
 	Sp&oslashrris navn: <br />
-	<input type="text" name="sporrisNavn"><br />
+	<input type="text" name="sporrisName" value="${sporrisName}"><br />
     
     <ul id="questions">
 		<c:forEach var="q" items="${qlist}">
 			<li class="question">
 				<div class="extend-control">
-					<input type="button" value="Lukk" class="button toggle-button">
-					<input type="button" value="Utvid" class="button toggle-button" style="display:none">
+					<button class="toggle-button" type="button">Lukk</button>
+					<button class="toggle-button" type="button" style="display:none">Utvid</button>
 				</div>
 				<div class="question-container">
 					${q.question_text} <br />
