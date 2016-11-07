@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import no.hib.dat104.project.helpers.SessionHelper;
 import no.hib.dat104.project.model.SporrisEAO;
 import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
@@ -29,8 +30,7 @@ public class OversiktServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if (session == null || session.getAttribute("loggedin") == null || !(boolean) session.getAttribute("loggedin")) {
+		if (!SessionHelper.isUserLoggedIn(request)) {
 			response.sendRedirect(LOGINURL);
 		} else {
 			request.getRequestDispatcher("WEB-INF/jsp/oversikt.jsp").forward(request, response);
@@ -41,50 +41,31 @@ public class OversiktServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		String sporrisId = request.getParameter("sporrisID");
-		System.out.println("Fikk parameter sporrisID: " + sporrisId);
-		int sporrisIDAsInt = Integer.parseInt(sporrisId);
-		System.out.println("Konveterer parameter sporrisIDAsInt: " + sporrisIDAsInt);
-
-		String buttonActivate = request.getParameter("activate");
-		System.out.println("Fikk parameter activate: " + buttonActivate);
-		String buttonStatistics = request.getParameter("statistics");
-		System.out.println("Fikk parameter statistics: " + buttonStatistics);
-		String buttonEdit = request.getParameter("edit");
-		System.out.println("Dette er buttonEDIT: " + buttonEdit);
-		String buttonDelete = request.getParameter("delete");
-		System.out.println("Dette er deleteknappen: " + buttonDelete);
+		int sporrisId = Integer.parseInt(request.getParameter("sporrisID"));
+		session.setAttribute("sporrisId", sporrisId);
 		
-
-		if (buttonActivate != null) {
-			System.out.println("knappen er trykket på");
-			System.out.println(sporrisId);
-			seao.activateSporris(sporrisIDAsInt);
+		if (request.getParameter("activate") != null) {
+			seao.activateSporris(sporrisId);
 			User u = ueao.findUser(((User) session.getAttribute("user")).getUid());
 			session.setAttribute("user", u);
 			response.sendRedirect(OVERSIKTURL);
 		}
-		
-		if (buttonStatistics != null) {
-			System.out.println("knappen er trykket på");
-			System.out.println(sporrisId);
+
+		if (request.getParameter("statistics") != null) {
 			// sporrisEAO.activateSporris(sporrisIDAsInt);
 			response.sendRedirect(OVERSIKTURL);
 		}
-		
-		if (buttonEdit != null) {
-			System.out.println("Vi er inne i edit nå");
-			session.setAttribute("sporrisId", sporrisId);
-			response.sendRedirect(EDITURL);
 
+		if (request.getParameter("edit") != null) {
+			response.sendRedirect(EDITURL);
 		}
 
-		if (buttonDelete != null) {
-			System.out.println("utfører slett og redirekter til oversikturl");
-			// sporrisEAO.removeSporris(sporrisIDAsInt);
+		if (request.getParameter("delete") != null) {
+			seao.removeSporris(sporrisId);
+			User u = ueao.findUser(((User) session.getAttribute("user")).getUid());
+			session.setAttribute("user", u);
 			response.sendRedirect(OVERSIKTURL);
 		}
-
 
 	}
 

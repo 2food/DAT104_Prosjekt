@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import no.hib.dat104.project.helpers.SessionHelper;
 import no.hib.dat104.project.javabeans.LoginJavaBean;
 import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
@@ -38,7 +39,6 @@ public class LoginServlet extends HttpServlet {
 			oldsession.invalidate();
 		}
 		HttpSession session = request.getSession();
-		session.setAttribute("loggedin", false);
 		LoginJavaBean login = new LoginJavaBean();
 		session.setAttribute("login", login);
 		request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
@@ -47,18 +47,15 @@ public class LoginServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
 		HttpSession session = request.getSession();
 		LoginJavaBean login = (LoginJavaBean) session.getAttribute("login");
-		login.setUsername(username);
-		login.setPassword(password);
+		login.setUsername(request.getParameter("username"));
+		login.setPassword(request.getParameter("password"));
 		LoginValidator.validate(login, ueao);
 		if (!login.isValidUsername() || !login.isValidPassword()) {
 			request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 		} else {
-			session.setAttribute("loggedin", true);
-			session.setAttribute("user", (User) ueao.findUser(login.getUsername())); 
+			SessionHelper.logInUser(request, (User) ueao.findUser(login.getUsername()));
 			response.sendRedirect(OVERSIKTURL);
 		}
 	}

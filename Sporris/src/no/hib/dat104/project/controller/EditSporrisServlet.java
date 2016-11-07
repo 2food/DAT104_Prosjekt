@@ -1,7 +1,8 @@
 package no.hib.dat104.project.controller;
 
+import static no.hib.dat104.project.controller.UrlMappings.EDITURL;
+
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,50 +17,42 @@ import javax.servlet.http.HttpSession;
 import no.hib.dat104.project.model.Alternative;
 import no.hib.dat104.project.model.Question;
 import no.hib.dat104.project.model.Sporris;
+import no.hib.dat104.project.model.SporrisEAO;
 import no.hib.dat104.project.model.User;
-import no.hib.dat104.project.model.UserEAO;
 
 /**
  * Servlet implementation class EditSporrisServlet
  */
-@WebServlet("/edit")
+@WebServlet("/" + EDITURL)
 public class EditSporrisServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	
+
 	@EJB
-	private UserEAO ueao;
-	
-	
-	User user;
-	Sporris sporris;
-	
-	public void init() {
-		user = makeDummyUser();
-		sporris = user.getSporrises().get(0);
-		
-	}
-	
-	
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private SporrisEAO seao;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Sporris sporris = seao.findSporris(((int) session.getAttribute("sporrisId")));
 		List<Question> qlist = sporris.getQuestions();
 		request.setAttribute("qlist", qlist);
 		request.getRequestDispatcher("WEB-INF/jsp/edit.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		PrintWriter out = response.getWriter();
-		
-		if (request.getParameter("newQCounter") != null && request.getParameter("newACounter") != null ) {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Sporris sporris = seao.findSporris((int) session.getAttribute("sporrisId"));
+
+		if (request.getParameter("newQCounter") != null && request.getParameter("newACounter") != null) {
 			// TODO type exception!!!!
 			int newQCounter = Integer.parseInt(request.getParameter("newQCounter"));
 			int newACounter = Integer.parseInt(request.getParameter("newACounter"));
-			
+
 			Question newQ;
 			Alternative newA;
 			for (int q = 0; q <= newQCounter; q++) {
@@ -68,34 +61,31 @@ public class EditSporrisServlet extends HttpServlet {
 					newQ.setQuestion_text(request.getParameter("newQ_" + q));
 					newQ.setAllow_multiple(true);
 					newQ.setAllow_text(Boolean.getBoolean(request.getParameter("newQ_" + q + "_text")));
-					newQ.setQid(20); //TODO generate
+					newQ.setQid(20); // TODO generate
 					newQ.setQuestion_sporris(sporris);
 					newQ.setAlternatives(new ArrayList<Alternative>());
 					for (int a = 0; a <= newACounter; a++) {
 						if (request.getParameter("newQ_" + q + "_aid_" + a) != null) {
 							newA = new Alternative();
-							newA.setAid(20); //TODO generate
+							newA.setAid(20); // TODO generate
 							newA.setAlternative_question(newQ);
 							newA.setAlternative_text(request.getParameter("newQ_" + q + "_aid_" + a));
-							newQ.getAlternatives().add(newA);							
+							newQ.getAlternatives().add(newA);
 						}
 					}
-					sporris.getQuestions().add(newQ); 
-					
+					sporris.getQuestions().add(newQ);
+
 				}
 			}
-			
-			
+
 			doGet(request, response);
 		} else {
 			doGet(request, response);
-			
+
 		}
-		
-		
-		
 	}
-	
+
+
 	/**
 	 * 
 	 * @return a static user
@@ -114,7 +104,7 @@ public class EditSporrisServlet extends HttpServlet {
 		s1.setSporris_tag("123qwe");
 		s1.setSporris_user(u1);
 		s1.setQuestions(new ArrayList<Question>());
-		
+
 		Question q1 = new Question();
 		q1.setAllow_multiple(true);
 		q1.setAllow_text(true);
@@ -122,17 +112,17 @@ public class EditSporrisServlet extends HttpServlet {
 		q1.setQuestion_sporris(s1);
 		q1.setQuestion_text("Heter du geir?");
 		q1.setAlternatives(new ArrayList<Alternative>());
-		
+
 		Alternative a1 = new Alternative();
 		a1.setAid(10);
 		a1.setAlternative_question(q1);
 		a1.setAlternative_text("Ja");
-		
+
 		Alternative a2 = new Alternative();
 		a2.setAid(11);
 		a2.setAlternative_question(q1);
 		a2.setAlternative_text("Nei");
-		
+
 		Question q2 = new Question();
 		q2.setAllow_multiple(true);
 		q2.setAllow_text(false);
@@ -140,12 +130,12 @@ public class EditSporrisServlet extends HttpServlet {
 		q2.setQuestion_sporris(s1);
 		q2.setQuestion_text("Heter du trine?");
 		q2.setAlternatives(new ArrayList<Alternative>());
-		
+
 		Alternative a3 = new Alternative();
 		a3.setAid(20);
 		a3.setAlternative_question(q2);
 		a3.setAlternative_text("Ja");
-		
+
 		Alternative a4 = new Alternative();
 		a4.setAid(21);
 		a4.setAlternative_question(q2);
@@ -158,7 +148,7 @@ public class EditSporrisServlet extends HttpServlet {
 		s1.getQuestions().add(q1);
 		s1.getQuestions().add(q2);
 		u1.getSporrises().add(s1);
-		
+
 		return u1;
 	}
 

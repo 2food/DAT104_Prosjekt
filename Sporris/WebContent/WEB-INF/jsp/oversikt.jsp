@@ -1,5 +1,4 @@
-<%@ page
-	import="static no.hib.dat104.project.controller.UrlMappings.OVERSIKTURL"%>
+<%@page import="no.hib.dat104.project.controller.UrlMappings"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -12,7 +11,7 @@
 <body>
 	<h1>Kontrollpanel for ${user.user_name} sine spørriser</h1>
 
-	<form action="login" method="get">
+	<form action="<%=UrlMappings.LOGINURL%>" method="get">
 		<input type="submit" value="Logg ut">
 	</form>
 
@@ -32,19 +31,19 @@
 				<td>${s.sid}</td>
 				<td>${s.sporris_name}</td>
 
-				<td><form action="oversikt" method="post">
+				<td><form action="<%=UrlMappings.OVERSIKTURL%>" method="post">
 						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
 							type="submit" name="activate" value="${s.active ? 'Deaktiver ' : 'Aktiver' }">
 					</form></td>
-				<td><form action="oversikt" method="post">
+				<td><form action="<%=UrlMappings.OVERSIKTURL%>" method="post">
 						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
 							type="submit" name="statictics" value="Statistikk">
 					</form></td>
-				<td><form action="oversikt" method="post">
+				<td><form action="<%=UrlMappings.OVERSIKTURL%>" method="post">
 						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
 							type="submit" name="edit" value="Rediger">
 					</form></td>
-				<td><form action="oversikt" method="post">
+				<td><form action="<%=UrlMappings.OVERSIKTURL%>" method="post">
 						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
 							type="submit" name="delete" value="Slett">
 					</form></td>
@@ -55,7 +54,7 @@
 
 
 	<p>
-		<a href="/Sporris/leggtil.html">Legg Til Spørris</a>
+		<a href="<%=UrlMappings.NEWSPORRIS%>">Legg Til Spørris</a>
 	</p>
 </body>
 </html>

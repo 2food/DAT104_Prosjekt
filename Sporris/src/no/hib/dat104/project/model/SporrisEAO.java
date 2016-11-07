@@ -1,7 +1,5 @@
 package no.hib.dat104.project.model;
 
-import static no.hib.dat104.project.controller.UrlMappings.FINNSPORRISURL;
-
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -63,7 +61,7 @@ public class SporrisEAO {
 	
 	
 	public void removeSporris(int sid) {
-		em.remove(em.find(User.class, sid));
+		em.remove(em.find(Sporris.class, sid));
 	}
 	/*
 	 * metode som s�ker etter en sporris med tag som parameter og returnerer sporris med riktig tag eller null
