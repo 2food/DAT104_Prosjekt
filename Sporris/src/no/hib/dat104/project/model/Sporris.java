@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,10 +31,10 @@ public class Sporris implements Serializable{
     @JoinColumn(name="sporris_user", referencedColumnName = "uid")
     private User sporris_user;
 
-	@OneToMany(mappedBy = "question_sporris", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "question_sporris", cascade = CascadeType.ALL)
 	private List<Question> questions;
 	
-	@OneToMany(mappedBy = "result_sporris", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "result_sporris", cascade = CascadeType.ALL)
 	private List<Result> results;
 	
 	public Sporris() {
@@ -46,7 +45,7 @@ public class Sporris implements Serializable{
 	 * sets all NOT NULL values to some defaults
 	 */
 	public Sporris(User owner) {
-		sporris_name = "Ny Spï¿½rris";
+		sporris_name = "Ny Spørris";
 		sporris_tag = "qwe123";
 		sporris_user = owner;
 		active = true;

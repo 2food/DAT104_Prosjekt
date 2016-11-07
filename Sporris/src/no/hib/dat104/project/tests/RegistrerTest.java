@@ -16,6 +16,12 @@ public class RegistrerTest {
 		assertTrue(validator.isValidUsername("Pettersen"));
 		assertFalse(validator.isValidUsername("dettenavneteraltforlangt"));
 	}
+	@Test
+	public void passwordTest(){
+		assertTrue(validator.isValidPassword("Hingst1234"));
+		assertTrue(validator.isValidPassword("Trollebukta?"));
+		assertFalse(validator.isValidPassword(""));
+	}
 	
 	@Test
 	public void usernameExistsTest(){

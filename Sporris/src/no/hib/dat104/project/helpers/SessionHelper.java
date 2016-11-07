@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import no.hib.dat104.project.model.User;
 /*
- * Hjelpeklasse for sessionshï¿½ndtering 
+ * Hjelpeklasse for sessionshåndtering 
  * @author Vegard
  */
 public class SessionHelper {
@@ -13,7 +13,8 @@ public class SessionHelper {
 	 */
 	public static void logInUser(HttpServletRequest request, User user){
 		HttpSession session = request.getSession(false);
-		session.setAttribute("loggedin", true);
+		
+		session.setAttribute("login", "true");
 		session.setAttribute("user", user);
 		
 	}
@@ -24,8 +25,8 @@ public class SessionHelper {
 	 * @param HttpSession
 	 * @return true hvis bruker er logget in
 	 */
-	public static boolean isUserLoggedIn(HttpServletRequest request){
-		HttpSession session = request.getSession(false);
-		return (session.getAttribute("loggedin") != null && ((boolean) session.getAttribute("loggedin")));
+	public boolean isUserLoggedIn(HttpSession session){
+		
+		return session.getAttribute("login").equals("true");
 	}
 }

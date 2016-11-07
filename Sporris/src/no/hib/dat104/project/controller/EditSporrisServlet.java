@@ -60,8 +60,10 @@ public class EditSporrisServlet extends HttpServlet {
 					newQ = new Question();
 					newQ.setQuestion_text(request.getParameter("newQ_" + q));
 					newQ.setAllow_multiple(true);
-					newQ.setAllow_text(Boolean.getBoolean(request.getParameter("newQ_" + q + "_text")));
-					newQ.setQid(20); // TODO generate
+					boolean allowText = (request.getParameter("newQ_" + q + "_text") != null && request.getParameter("newQ_" + q + "_text").equals("on"));
+					newQ.setAllow_text(allowText ? true : false);
+					System.out.println(request.getParameter("newQ_" + q + "_text"));
+					System.out.println(newQ.isAllow_text());
 					newQ.setQuestion_sporris(sporris);
 					newQ.setAlternatives(new ArrayList<Alternative>());
 					for (int a = 0; a <= newACounter; a++) {

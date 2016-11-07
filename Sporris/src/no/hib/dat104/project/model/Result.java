@@ -25,7 +25,7 @@ public class Result {
 	@JoinColumn(name="result_sporris", referencedColumnName="sid")
 	private Sporris result_sporris;
 	
-	@OneToMany(mappedBy = "response_result", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "response_result", cascade = CascadeType.ALL)
 	private List<Response> responses;
 	
 	public int getRid() {

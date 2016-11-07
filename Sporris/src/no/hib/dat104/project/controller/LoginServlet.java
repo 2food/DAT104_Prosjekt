@@ -55,7 +55,11 @@ public class LoginServlet extends HttpServlet {
 		if (!login.isValidUsername() || !login.isValidPassword()) {
 			request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 		} else {
-			SessionHelper.logInUser(request, (User) ueao.findUser(login.getUsername()));
+			session.setAttribute("loggedin", true);
+			User user = (User) ueao.findUser(login.getUsername());
+			session.setAttribute("user", user);
+			session.setAttribute("userId", user.getUid()); 
+
 			response.sendRedirect(OVERSIKTURL);
 		}
 	}

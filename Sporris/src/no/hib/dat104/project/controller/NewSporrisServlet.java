@@ -39,11 +39,14 @@ public class NewSporrisServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// TODO sync w/ overview
-		request.setAttribute("userId", 100);
-		session.setAttribute("userId", 100);
+//		request.setAttribute("userId", 100);
+		if (session.getAttribute("userId") == null) {
+			session.setAttribute("userId", 100);
+		}
 		
-		userId = (Integer) request.getAttribute("userId");
+		userId = (Integer) session.getAttribute("userId");
 		if(session.getAttribute("user") == null || session.getAttribute("user").getClass().equals(User.class)) {
+			System.out.println("Dette skjer, uid: " + userId);
 			user = ueao.findUserCascade(userId);
 			session.setAttribute("user", user);			
 		} else {

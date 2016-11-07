@@ -1,7 +1,5 @@
 package no.hib.dat104.project.model;
 
-import static no.hib.dat104.project.controller.UrlMappings.FINNSPORRISURL;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,26 +48,20 @@ public class SporrisEAO {
 	
 	
 	/*
-	 * Aktiverer en spørris om den er inaktiv.
-	 * Deaktiverer hvis den er aktiv.
+	 * Aktiverer en spørris
 	 * @Param spørrisId
 	 */
 	public void activateSporris(int sid){
-		Sporris sporris = findSporris(sid);
-		if (sporris.isActive()) {
-			sporris.setActive(false);
-		} else {
-			sporris.setActive(true);
-		}
-		updateSporris(sporris);
+		findSporris(sid).setActive(true);
+		updateSporris(findSporris(sid));
 	}
 	
 	
 	public void removeSporris(int sid) {
-		em.remove(em.find(Sporris.class, sid));
+		em.remove(em.find(User.class, sid));
 	}
 	/*
-	 * metode som s�ker etter en sporris med tag som parameter og returnerer sporris med riktig tag eller null
+	 * metode som s�ker etter en sporris med tag som parameter og returnerer sporris med riktig tag eller null
 	 * @param sporristag
 	 * @return sporris
 	 */

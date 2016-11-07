@@ -7,5 +7,5 @@ public class UrlMappings {
 	public static final String SPORRISURL = "sporris";
 	public static final String NEWUSERURL = "opprettnybruker";
 	public static final String EDITURL = "endresporris";
-	public static final String NEWSPORRIS = "newsporris";
+
 }
