@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 		} else {
 			session.setAttribute("loggedin", true);
-			User user = (User) ueao.findUser(login.getUsername());
+			User user = ueao.findUserCascade(((User) ueao.findUser(login.getUsername())).getUid());
 			session.setAttribute("user", user);
 			session.setAttribute("userId", user.getUid()); 
 

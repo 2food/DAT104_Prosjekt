@@ -46,7 +46,7 @@ public class OversiktServlet extends HttpServlet {
 		
 		if (request.getParameter("activate") != null) {
 			seao.activateSporris(sporrisId);
-			User u = ueao.findUser(((User) session.getAttribute("user")).getUid());
+			User u = ueao.findUserCascade(((User) session.getAttribute("user")).getUid());
 			session.setAttribute("user", u);
 			response.sendRedirect(OVERSIKTURL);
 		}
@@ -62,7 +62,7 @@ public class OversiktServlet extends HttpServlet {
 
 		if (request.getParameter("delete") != null) {
 			seao.removeSporris(sporrisId);
-			User u = ueao.findUser(((User) session.getAttribute("user")).getUid());
+			User u = ueao.findUserCascade(((User) session.getAttribute("user")).getUid());
 			session.setAttribute("user", u);
 			response.sendRedirect(OVERSIKTURL);
 		}
