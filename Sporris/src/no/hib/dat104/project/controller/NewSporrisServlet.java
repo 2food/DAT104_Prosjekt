@@ -17,7 +17,7 @@ import no.hib.dat104.project.model.UserEAO;
 /**
  * Servlet implementation class NewSporrisServlet
  */
-@WebServlet("/NewSporrisServlet")
+@WebServlet("/"+UrlMappings.NEWSPORRIS)
 public class NewSporrisServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -58,7 +58,7 @@ public class NewSporrisServlet extends HttpServlet {
 		session.setAttribute("sporrisId", sporris.getSid());
 		
 
-		response.sendRedirect("edit");
+		response.sendRedirect(UrlMappings.EDITURL);
 		
 	}
 

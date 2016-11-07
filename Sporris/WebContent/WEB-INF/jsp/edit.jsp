@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="no.hib.dat104.project.controller.UrlMappings"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -20,7 +21,7 @@
 
 <div id="site_container">
 
-<form id="sporris_edit_form" name="sporrisEditForm" action="edit" method="post">
+<form id="sporris_edit_form" name="sporrisEditForm" action="${UrlMappings.EDITURL}" method="post">
 	<input id="newQCounter" type="hidden" name="newQCounter" value="0">
 	<input id="newACounter" type="hidden" name="newACounter" value="0">
 
