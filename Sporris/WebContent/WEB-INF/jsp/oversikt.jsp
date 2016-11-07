@@ -47,7 +47,7 @@
 
 
 	<p>
-		<a href="/Sporris/leggtil.html">Legg Til Spørris</a>
+		<a href="/Sporris/NewSporrisServlet">Legg Til Spørris</a>
 	</p>
 </body>
 </html>

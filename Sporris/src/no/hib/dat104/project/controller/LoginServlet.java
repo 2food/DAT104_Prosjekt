@@ -58,7 +58,9 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 		} else {
 			session.setAttribute("loggedin", true);
-			session.setAttribute("user", (User) ueao.findUser(login.getUsername())); 
+			User user = (User) ueao.findUser(login.getUsername());
+			session.setAttribute("user", user);
+			session.setAttribute("userId", user.getUid()); 
 			response.sendRedirect(OVERSIKTURL);
 		}
 	}
