@@ -17,7 +17,7 @@ public class Alternative {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int aid;
 	private String alternative_text;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "alternative_question", referencedColumnName = "qid")
 	private Question alternative_question;
 
@@ -44,6 +44,17 @@ public class Alternative {
 	public void setAlternative_question(Question alternative_question) {
 		this.alternative_question = alternative_question;
 
+	}
+	
+	/**
+	 * checks if content equals
+	 * @param a
+	 * @return
+	 */
+	public boolean contentEquals(Alternative a) {
+		boolean eq;
+		eq = alternative_text.equals(a.getAlternative_text());
+		return eq;
 	}
 
 	@Override

@@ -21,11 +21,11 @@ public class Result {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int rid;
 	private String result_name;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="result_sporris", referencedColumnName="sid")
 	private Sporris result_sporris;
 	
-	@OneToMany(mappedBy = "response_result", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "response_result", cascade = CascadeType.ALL)
 	private List<Response> responses;
 	
 	public int getRid() {

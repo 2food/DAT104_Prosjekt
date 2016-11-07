@@ -1,11 +1,11 @@
 package no.hib.dat104.project.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,15 +27,32 @@ public class Sporris implements Serializable{
 	private String sporris_tag;
 	private boolean active;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
     @JoinColumn(name="sporris_user", referencedColumnName = "uid")
     private User sporris_user;
 
-	@OneToMany(mappedBy = "question_sporris", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "question_sporris", cascade = CascadeType.ALL)
 	private List<Question> questions;
 	
-	@OneToMany(mappedBy = "result_sporris", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "result_sporris", cascade = CascadeType.ALL)
 	private List<Result> results;
+	
+	public Sporris() {
+		
+	}
+	
+	/**
+	 * sets all NOT NULL values to some defaults
+	 */
+	public Sporris(User owner) {
+		sporris_name = "Ny Spørris";
+		sporris_tag = "qwe123";
+		sporris_user = owner;
+		active = true;
+		questions = new ArrayList<Question>();
+		results = new ArrayList<Result>();
+		
+	}
 	
 	public int getSid() {
 		return sid;
@@ -67,6 +84,8 @@ public class Sporris implements Serializable{
 	public void setSporris_user(User sporris_user) {
 		this.sporris_user = sporris_user;
 	}
+	
+	
 	public List<Question> getQuestions() {
 		return questions;
 	}
@@ -78,6 +97,18 @@ public class Sporris implements Serializable{
 	}
 	public void setResults(List<Result> results) {
 		this.results = results;
+	}
+	
+	
+	public boolean contains(Question q) {
+		boolean c = false;
+		for (Question q1 : questions) {
+			if (q1.contentEquals(q)) {
+				c = true;
+				break;
+			}
+		}
+		return c;
 	}
 	
 }
