@@ -88,6 +88,8 @@ public class RegistrerNewUserServlet extends HttpServlet {
 			userEAO.addUser(user);
 			// Legger til en login, true og username i session
 			session.setAttribute("loggedin", true);
+			session.setAttribute("user", user);
+			session.setAttribute("userId", user.getUid()); 
 			response.sendRedirect(OVERSIKTURL);
 			
 		} else {
