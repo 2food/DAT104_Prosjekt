@@ -71,6 +71,7 @@ public class UserEAO {
 		for (Sporris s : q) {
 			if (s.getSporris_user().equals(user)) {
 				s.setQuestions(allQuestionsBySporris(s));
+				s.setResults(allResultsBySporris(s));
 				sl.add(s);
 			}
 		}
@@ -115,7 +116,47 @@ public class UserEAO {
 		}
 		return al;
 	}
-	
+
+
+	/**
+	 * get all questions of sporris
+	 * @param sporris
+	 * @return List<Question>
+	 * @author Torstein
+	 */
+	public List<Result> allResultsBySporris(Sporris sporris) {
+		TypedQuery<Result> query = em.createQuery("SELECT r FROM Result r", Result.class);
+		List<Result> q = query.getResultList();
+		List<Result> rl = new ArrayList<Result>();
+		for (Result r : q) {
+			if (r.getResult_sporris().equals(sporris)) {
+				r.setResponses(allResponsesByResult(r));
+				rl.add(r);
+			}
+		}		
+		return rl;
+	}
+
+
+
+	/**
+	 * get all alternatives of question
+	 * @param question
+	 * @return List<Alternative>
+	 * @author Torstein
+	 */
+	public List<Response> allResponsesByResult(Result result) {
+		TypedQuery<Response> query = em.createQuery("SELECT r FROM Response r", Response.class);
+		List<Response> q = query.getResultList();
+		List<Response> rl = new ArrayList<Response>();;
+		for (Response r : q) {
+			if (r.getResponse_result().equals(result)) {
+				rl.add(r);
+			}
+		}
+		return rl;
+	}
+
 	
 	
 	public User findUser(Integer uid) {

@@ -20,6 +20,8 @@ public class Response {
 	@JoinColumn(name = "response_result", referencedColumnName = "rid")
 	private Result response_result;
 
+
+
 	public int getResponse_id() {
 		return response_id;
 	}
@@ -32,7 +34,7 @@ public class Response {
 		return response_text;
 	}
 
-	public void setRespnse_text(String response_text) {
+	public void setResponse_text(String response_text) {
 		this.response_text = response_text;
 	}
 

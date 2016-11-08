@@ -1,5 +1,6 @@
 package no.hib.dat104.project.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,6 +28,28 @@ public class Result {
 	@OneToMany(mappedBy = "response_result", cascade = CascadeType.ALL)
 	private List<Response> responses;
 	
+	public Result() {
+		
+	}
+	
+	public Result(Sporris s) {
+		result_sporris = s;
+		responses = new ArrayList<Response>();
+		result_name = "Aktiv";		
+	}
+	
+	public void addResponse(Response r) {
+		responses.add(r);
+	}
+	
+	public List<Response> getResponses() {
+		return responses;
+	}
+
+	public void setResponses(List<Response> responses) {
+		this.responses = responses;
+	}
+
 	public int getRid() {
 		return rid;
 	}

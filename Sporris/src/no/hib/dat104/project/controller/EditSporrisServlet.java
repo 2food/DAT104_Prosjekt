@@ -47,7 +47,6 @@ public class EditSporrisServlet extends HttpServlet {
 		if (session.getAttribute("userId") == null || session.getAttribute("sporrisId") == null) {
 			session.setAttribute("sporrisId", 100);
 			session.setAttribute("userId", 100);
-			System.out.println("neeeei");
 		}
 		userId = (Integer) session.getAttribute("userId");
 		sporrisId = (Integer) session.getAttribute("sporrisId");
@@ -77,7 +76,6 @@ public class EditSporrisServlet extends HttpServlet {
 		if (session.getAttribute("userId") == null || session.getAttribute("sporrisId") == null) {
 			session.setAttribute("sporrisId", 100);
 			session.setAttribute("userId", 100);
-			System.out.println("neeeei");
 		}
 		userId = (Integer) session.getAttribute("userId");
 		sporrisId = (Integer) session.getAttribute("sporrisId");
@@ -112,8 +110,8 @@ public class EditSporrisServlet extends HttpServlet {
 					newQ.setQuestion_text(request.getParameter("newQ_" + q));
 					newQ.setAllow_multiple(true);
 					newQ.setAllow_text(request.getParameter("newQ_" + q + "_text").equals("on") ? true : false);
-					System.out.println(request.getParameter("newQ_" + q + "_text"));
-					System.out.println(newQ.isAllow_text());
+//					System.out.println(request.getParameter("newQ_" + q + "_text"));
+//					System.out.println(newQ.isAllow_text());
 					newQ.setQuestion_sporris(sporris);
 					newQ.setAlternatives(new ArrayList<Alternative>());
 					for (int a = 0; a <= newACounter; a++) {
