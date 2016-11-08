@@ -50,7 +50,7 @@
     
     </ul>
 	
-	<input type="submit" value="lagre">
+	<button type="submit" class="button">Lagre</button>
 
 
 
