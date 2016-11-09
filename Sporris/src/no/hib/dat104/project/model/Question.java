@@ -1,5 +1,6 @@
 package no.hib.dat104.project.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,6 +29,36 @@ public class Question {
 	
 	@OneToMany(mappedBy = "alternative_question", cascade = CascadeType.ALL)
 	private List<Alternative> alternatives;
+	
+	public Question() {
+		
+	}
+	
+	/**
+	 * constructor
+	 * @param questionText
+	 * @param allowText
+	 * @param allowMultiple
+	 * @param sporris
+	 */
+	public Question(String questionText, boolean allowText, boolean allowMultiple, Sporris sporris) {
+		question_text = questionText;
+		allow_text = allowText;
+		allow_multiple = allowMultiple;
+		question_sporris = sporris;
+		alternatives = new ArrayList<Alternative>();
+	}
+	
+	/**
+	 * add Alternative a to the question
+	 * @param a
+	 */
+	public void addAlternative(Alternative a) {
+		if (alternatives == null) {
+			alternatives = new ArrayList<Alternative>();
+		}
+		alternatives.add(a);
+	}
 	
 	public int getQid() {
 		return qid;

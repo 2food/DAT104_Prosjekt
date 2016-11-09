@@ -1,5 +1,6 @@
 package no.hib.dat104.project.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,6 +24,30 @@ public class User {
 	@OneToMany(mappedBy = "sporris_user", cascade = CascadeType.ALL)
 	private List<Sporris> sporrises;
 	
+	public User () {
+		
+	}
+	/**
+	 * constructor
+	 * @param user_name
+	 * @param user_password
+	 * @author Torstein
+	 */
+	public User(String user_name, String user_password) {
+		this.user_name = user_name;
+		this.user_password = user_password;
+		sporrises = new ArrayList<Sporris>();
+	}
+	/**
+	 * add sporris to the user
+	 * @param sporris
+	 */
+	public void addSporris(Sporris sporris) {
+		if (sporrises == null) {
+			sporrises = new ArrayList<Sporris>();
+		}
+		sporrises.add(sporris);
+	}
 	
 	public int getUid() {
 		return uid;

@@ -20,6 +20,14 @@ public class Alternative {
 	@JoinColumn(name = "alternative_question", referencedColumnName = "qid")
 	private Question alternative_question;
 
+	public Alternative() {
+		
+	}
+	public Alternative(String alternativeText, Question question) {
+		alternative_text = alternativeText;
+		alternative_question = question;
+	}
+
 	public int getAid() {
 		return aid;
 	}

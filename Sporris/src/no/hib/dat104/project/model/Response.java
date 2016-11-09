@@ -20,7 +20,14 @@ public class Response {
 	@JoinColumn(name = "response_result", referencedColumnName = "rid")
 	private Result response_result;
 
-
+	public Response() {
+		
+	}
+	
+	public Response(String responseText, Result result) {
+		response_text = responseText;
+		response_result = result;
+	}
 
 	public int getResponse_id() {
 		return response_id;

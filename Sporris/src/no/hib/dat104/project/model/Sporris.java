@@ -1,6 +1,7 @@
 package no.hib.dat104.project.model;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import no.hib.dat104.project.helpers.TagGenerator;
 
 
 @Entity
@@ -43,16 +46,62 @@ public class Sporris implements Serializable{
 	
 	/**
 	 * sets all NOT NULL values to some defaults
+	 * @author Torstein
 	 */
 	public Sporris(User owner) {
-		sporris_name = "Ny Spï¿½rris";
-		sporris_tag = "qwe123";
+		sporris_name = "Ny Spørris";
+		sporris_tag = TagGenerator.nyTag();
 		sporris_user = owner;
 		active = true;
 		questions = new ArrayList<Question>();
 		results = new ArrayList<Result>();
 		
 	}
+	/**
+	 * add question q to the sporris
+	 * @param q
+	 * @author Torstein
+	 */
+	public void addQuestion(Question q) {
+		if (questions == null) {
+			questions = new ArrayList<Question>();
+		}
+		questions.add(q);
+	}
+	
+	/**
+	 * add a new active result, store the old akvtive result
+	 * @author Torstein
+	 */
+	public void addResult() {
+		Result activeResult = getActiveResult();
+		if (activeResult != null) {
+			Time time = new Time(System.currentTimeMillis());
+			activeResult.setResult_name(time.toString());
+		}
+		results.add(new Result(this));
+	}
+	/**
+	 * get the active result for responses to be added to
+	 * @return
+	 * @author Torstein
+	 */
+	public Result getActiveResult() {
+		Result result = null;
+		if (results == null) {
+			results = new ArrayList<Result>();
+			results.add(new Result(this));
+		} else {
+			for (Result r : results	) {
+				if (r.getResult_name().equals("Aktiv")) {
+					result = r;
+					break;
+				}
+			}
+		}
+		return result;
+	}
+		
 	
 	public int getSid() {
 		return sid;
