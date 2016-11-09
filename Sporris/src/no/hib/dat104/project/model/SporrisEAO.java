@@ -76,15 +76,13 @@ public class SporrisEAO {
 	public Sporris findSporrisByTag(String tag){
 		List<Sporris> allSporrisis = allSporris();
 		Sporris returnSporris = new Sporris();
+		returnSporris=null;
 		for(Sporris sporris : allSporrisis){
-			if(!tag.equals(sporris.getSporris_tag())){
-				return null;
-			}else{
+			if(tag.equals(sporris.getSporris_tag())){
 				returnSporris = sporris;
+				break;
 			}
 		}
 		return returnSporris;
-			
 	}
-	
 }

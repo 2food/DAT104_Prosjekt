@@ -36,7 +36,7 @@ public class FinnSporrisServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List<Sporris> allSporris = seao.allSporris();
+		//List<Sporris> allSporris = seao.allSporris();
 		String tag = request.getParameter("tag");
 		HttpSession session = request.getSession(true);
 		session.setAttribute("tag", tag);
