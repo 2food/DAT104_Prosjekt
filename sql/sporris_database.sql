@@ -21,7 +21,7 @@ CREATE TABLE sporris (
 	sporris_tag VARCHAR(6) NOT NULL,
 	active BOOLEAN,
 	last_edited TIMESTAMP,
-	expire_date TIMESTAMP,
+	expire_timestamp TIMESTAMP,
 	PRIMARY KEY(sid),
 	FOREIGN KEY(sporris_user) REFERENCES s_user(uid)
 );
@@ -69,10 +69,10 @@ INSERT INTO alternative VALUES (0,'Ja',0);
 INSERT INTO alternative VALUES (1,'Nei',0);
 
 
-INSERT INTO sporris VALUES (100,'Undersøkelse',0,'234wer',true,'2004-10-19 10:23:54','2100-10-19 10:23:54');
-INSERT INTO question VALUES (1,'Heter du Geir?',0,FALSE,FALSE,100);
+INSERT INTO sporris VALUES (100,'Undersøkelse',100,'234wer',true,'2004-10-19 10:23:54','2100-10-19 10:23:54');
+INSERT INTO question VALUES (1,'Heter du Geir?',100,FALSE,FALSE,0);
 INSERT INTO alternative VALUES (2,'Ja',1);
 INSERT INTO alternative VALUES (3,'Nei',1);
-INSERT INTO question VALUES (2,'Heter du Per?',0,FALSE,FALSE,100);
+INSERT INTO question VALUES (2,'Heter du Per?',100,FALSE,FALSE,1);
 INSERT INTO alternative VALUES (4,'Ja',2);
 INSERT INTO alternative VALUES (5,'Nei',2);

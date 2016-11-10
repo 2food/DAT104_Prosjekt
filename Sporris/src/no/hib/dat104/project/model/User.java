@@ -1,6 +1,7 @@
 package no.hib.dat104.project.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -77,6 +78,14 @@ public class User {
 	public List<Sporris> getSporrises() {
 		return sporrises;
 	}
+	public List<Sporris> getSporrisesOrdered() {
+		List<Sporris> ordered = new ArrayList<Sporris>();
+		for ( Sporris s : sporrises ) {
+			ordered.add(s);
+		}
+		Collections.sort(ordered);
+		return ordered;
+	}
 	public void setSporrises(List<Sporris> sporrises) {
 		this.sporrises = sporrises;
 	}
@@ -89,5 +98,6 @@ public class User {
 	public void setUser_password(String user_password) {
 		this.user_password = user_password;
 	}
+	
 
 }

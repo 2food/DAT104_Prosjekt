@@ -50,7 +50,7 @@ function newQuestion(counter) {
     line += '<div class="extend-control"><button type="button" class="toggle-button">Lukk</button><button type="button" class="toggle-button" style="display:none">Utvid</button></div>';
     line += '<div class="question-container">Sp&oslashrsm&aringl:<br /><input type="text" name="newQ_' + counter + '">';
     line += '<ul class="alternatives"><li class="alternative"><input type="checkbox" name ="newQ_' + counter + '_text">Inkluder tekstsvar</li>';
-    line += '<ul class="alternatives"><li class="alternative"><input type="checkbox" name ="newQ_' + counter + '_multiple"></li>';
+    line += '<li class="alternative"><input type="checkbox" name ="newQ_' + counter + '_multiple">Flervalg</li>';
     line += newAlternativeButton();
     line += '</ul></div></li>';
     return line;

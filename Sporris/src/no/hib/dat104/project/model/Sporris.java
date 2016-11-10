@@ -2,7 +2,9 @@ package no.hib.dat104.project.model;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +22,7 @@ import no.hib.dat104.project.helpers.TagGenerator;
 
 @Entity
 @Table(schema = "sporris_database", name = "sporris")
-public class Sporris implements Serializable{
+public class Sporris implements Serializable, Comparable<Sporris>{
 	private static final long serialVersionUID = 5356895219389998211L;
 	
 	@Id
@@ -29,6 +31,8 @@ public class Sporris implements Serializable{
 	private String sporris_name;
 	private String sporris_tag;
 	private boolean active;
+	private Timestamp last_edited;
+	private Timestamp expire_timestamp;
 	
 	@ManyToOne
     @JoinColumn(name="sporris_user", referencedColumnName = "uid")
@@ -143,9 +147,17 @@ public class Sporris implements Serializable{
 		this.sporris_user = sporris_user;
 	}
 	
-	
+
 	public List<Question> getQuestions() {
 		return questions;
+	}
+	public List<Question> getQuestionsOrdered() {
+		List<Question> ordered = new ArrayList<Question>();
+		for ( Question q : questions ) {
+			ordered.add(q);
+		}
+		Collections.sort(ordered);
+		return ordered;
 	}
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
@@ -167,6 +179,30 @@ public class Sporris implements Serializable{
 			}
 		}
 		return c;
+	}
+	public Timestamp getLast_edited() {
+		return last_edited;
+	}
+
+	public void setLast_edited(Timestamp last_edited) {
+		this.last_edited = last_edited;
+	}
+
+	public Timestamp getExpire_timestamp() {
+		return expire_timestamp;
+	}
+
+	public void setExpire_timestamp(Timestamp expire_timestamp) {
+		this.expire_timestamp = expire_timestamp;
+	}
+	public int getnewListIndex() {
+		List<Question> ordered = getQuestions();
+		return ordered.get(ordered.size()-1).getList_index();
+	}
+
+	@Override
+	public int compareTo(Sporris s) {
+		return last_edited.compareTo(s.getLast_edited());
 	}
 	
 }
