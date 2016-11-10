@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import no.hib.dat104.project.helpers.Passordkryptering;
 import no.hib.dat104.project.helpers.SessionHelper;
 import no.hib.dat104.project.javabeans.LoginJavaBean;
 import no.hib.dat104.project.model.User;

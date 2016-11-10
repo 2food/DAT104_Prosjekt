@@ -2,6 +2,7 @@ package no.hib.dat104.project.validators;
 
 import javax.ejb.EJB;
 
+import no.hib.dat104.project.helpers.Passordkryptering;
 import no.hib.dat104.project.javabeans.LoginJavaBean;
 import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
@@ -30,7 +31,7 @@ public class LoginValidator {
 			// bruker finnes ikke
 			login.setValidUsername(false);
 			login.setValidPassword(true);
-		} else if (!login.getPassword().equals(user.getUser_password())) {
+		} else if (!Passordkryptering.sjekkPassord(login.getPassword(),user.getUser_password())) {
 			// bruker finnes, men passord er feil
 			login.setValidUsername(true);
 			login.setValidPassword(false);
