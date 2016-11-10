@@ -20,6 +20,8 @@ CREATE TABLE sporris (
 	sporris_user INT NOT NULL,
 	sporris_tag VARCHAR(6) NOT NULL,
 	active BOOLEAN,
+	last_edited TIMESTAMP,
+	expire_date TIMESTAMP,
 	PRIMARY KEY(sid),
 	FOREIGN KEY(sporris_user) REFERENCES s_user(uid)
 );
@@ -30,6 +32,7 @@ CREATE TABLE question (
 	question_sporris INT NOT NULL,
 	allow_multiple BOOLEAN,
 	allow_text BOOLEAN,
+	list_index INT,
 	PRIMARY KEY(qid),
 	FOREIGN KEY(question_sporris) REFERENCES sporris(sid)
 );
@@ -58,11 +61,18 @@ CREATE TABLE response (
 	FOREIGN KEY(response_result ) REFERENCES result(rid)
 );
 
-INSERT INTO s_user VALUES (0,'admin','pass');
-INSERT INTO sporris VALUES (0,'Undersøkelse',0,'123qwe',true);
-INSERT INTO question VALUES (0,'Heter du Geir?',0,FALSE,FALSE);
+INSERT INTO s_user VALUES (0,'Bolle','123');
+INSERT INTO s_user VALUES (100,'BigOldTestUser','pass');
+INSERT INTO sporris VALUES (0,'Undersøkelse',0,'123qwe',true,'2004-10-19 10:23:54','2100-10-19 10:23:54');
+INSERT INTO question VALUES (0,'Heter du Geir?',0,FALSE,FALSE,0);
 INSERT INTO alternative VALUES (0,'Ja',0);
 INSERT INTO alternative VALUES (1,'Nei',0);
-INSERT INTO result VALUES (0,'Aktiv',0);
-INSERT INTO response VALUES (0,'sp1_0',0);
-INSERT INTO response VALUES (1,'sp1_1',0);
+
+
+INSERT INTO sporris VALUES (100,'Undersøkelse',0,'234wer',true,'2004-10-19 10:23:54','2100-10-19 10:23:54');
+INSERT INTO question VALUES (1,'Heter du Geir?',0,FALSE,FALSE,100);
+INSERT INTO alternative VALUES (2,'Ja',1);
+INSERT INTO alternative VALUES (3,'Nei',1);
+INSERT INTO question VALUES (2,'Heter du Per?',0,FALSE,FALSE,100);
+INSERT INTO alternative VALUES (4,'Ja',2);
+INSERT INTO alternative VALUES (5,'Nei',2);
