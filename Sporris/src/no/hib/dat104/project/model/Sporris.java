@@ -70,6 +70,14 @@ public class Sporris implements Serializable{
 	}
 	
 	/**
+	 * adds a response to the sporris' active result
+	 * @param r
+	 */
+	public void addResponse(Response r) {
+		getActiveResult().addResponse(r);
+	}
+	
+	/**
 	 * add a new active result, store the old akvtive result
 	 * @author Torstein
 	 */
@@ -90,7 +98,8 @@ public class Sporris implements Serializable{
 		Result result = null;
 		if (results == null) {
 			results = new ArrayList<Result>();
-			results.add(new Result(this));
+			result = new Result(this);
+			results.add(result);
 		} else {
 			for (Result r : results	) {
 				if (r.getResult_name().equals("Aktiv")) {

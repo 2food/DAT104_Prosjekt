@@ -3,7 +3,6 @@ package no.hib.dat104.project.controller;
 import static no.hib.dat104.project.controller.UrlMappings.SPORRISURL;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -13,9 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import no.hib.dat104.project.helpers.DataLoader;
 import no.hib.dat104.project.helpers.ResponseParser;
+import no.hib.dat104.project.javabeans.SporrisSubmitJavaBean;
 import no.hib.dat104.project.model.Response;
-import no.hib.dat104.project.model.Result;
 import no.hib.dat104.project.model.Sporris;
 import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
@@ -31,64 +31,46 @@ public class SporrisServlet extends HttpServlet {
 	int sporrisId;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user;
-		Sporris sporris;
-		HttpSession session = request.getSession(); 
+		HttpSession session = request.getSession();  
 		
-		// TODO sync w/ overview
-		if (session.getAttribute("userId") == null || session.getAttribute("sporrisId") == null) {
-			session.setAttribute("sporrisId", 100);
-			session.setAttribute("userId", 100);
-		}
-		userId = (Integer) session.getAttribute("userId");
-		sporrisId = (Integer) session.getAttribute("sporrisId");
-		if(session.getAttribute("user") == null || session.getAttribute("user").getClass().equals(User.class)) {
-			user = ueao.findUserCascade(userId);
-			session.setAttribute("user", user);			
-		} else {
-			user = (User) session.getAttribute("user");
-		}
-		sporris = user.getSporris(sporrisId);
+//		User user;
+//		user = DataLoader.getUser(session, ueao);
+		Sporris sporris;
+		sporris = DataLoader.getSporris(session, ueao);
 		request.setAttribute("sporris", sporris);
-		request.setAttribute("url", SPORRISURL);
+		
+//		request.setAttribute("url", SPORRISURL);
 
 		request.getRequestDispatcher("WEB-INF/jsp/sporris.jsp").forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();  
+		
 		User user;
+		user = DataLoader.getUser(session, ueao);
 		Sporris sporris;
-		HttpSession session = request.getSession(); 
+		sporris = DataLoader.getSporris(session, ueao);
 		
-		// TODO sync w/ overview
-		if (session.getAttribute("userId") == null || session.getAttribute("sporrisId") == null) {
-			session.setAttribute("sporrisId", 100);
-			session.setAttribute("userId", 100);
-		}
-		userId = (Integer) session.getAttribute("userId");
-		sporrisId = (Integer) session.getAttribute("sporrisId");
-		if(session.getAttribute("user") == null || session.getAttribute("user").getClass().equals(User.class)) {
-			user = ueao.findUserCascade(userId);
-			session.setAttribute("user", user);			
-		} else {
-			user = (User) session.getAttribute("user");
-			user = ueao.findUserCascade(user.getUid());
-		}
-		sporris = user.getSporris(sporrisId);
-		
-		
-		if (sporris.getResults() == null || sporris.getResults().size() == 0) {
-			sporris.setResults(new ArrayList<Result>());
-			sporris.getResults().add(new Result(sporris));
-		}
-		Response r = ResponseParser.parseRequest(sporris, sporris.getResults().get(0).getRid(), request);
-		sporris.getResults().get(0).addResponse(r);
-		
+		Response r = ResponseParser.parseRequest(sporris, request);
+		// DEBUG
 		System.out.println(r.getResponse_text());
 		
-		ueao.updateUser(user);
-		doGet(request, response);
+		SporrisSubmitJavaBean ssjb = new SporrisSubmitJavaBean(r, sporris);
+		if (ssjb.isValid()) {
+			sporris.addResponse(r);
+			ueao.updateUser(user);
+			session.setAttribute("ssjb", null);
+			// DEBUG
+			System.out.println("response deemed valid");
+		} else {
+			session.setAttribute("ssjb", ssjb);
+		}
+		
+		
+//		doGet(request, response);
+		response.sendRedirect(SPORRISURL); 
 	}
 
 }

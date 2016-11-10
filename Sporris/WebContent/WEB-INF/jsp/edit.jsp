@@ -26,17 +26,17 @@
 	<input id="newACounter" type="hidden" name="newACounter" value="0">
 
 	Sp&oslashrris navn: <br />
-	<input type="text" name="sporrisName" value="${sporrisName}"><br />
+	<input type="text" name="sporrisName" value="${sporris.sporris_name}"><br />
     
     <ul id="questions">
-		<c:forEach var="q" items="${qlist}">
+		<c:forEach var="q" items="${sporris.questions}">
 			<li class="question">
 				<div class="extend-control">
 					<button class="toggle-button" type="button">Lukk</button>
 					<button class="toggle-button" type="button" style="display:none">Utvid</button>
 				</div>
 				<div class="question-container">
-					${q.question_text} <br />
+					<p class="question-text"> ${q.question_text} </p>
 					<ul id="alternatives">
 						<li class="alternative"><input type="checkbox" ${q.allow_text ? checked : unchecked}> Fritekst</li>
 						<c:forEach var="a" items="${q.alternatives}">
@@ -46,7 +46,7 @@
 				</div>
 			</li>
 		</c:forEach> 
-
+		<li class="question"><button type="button" class="button add-question-button">Legg til Sp&oslashrsm&aringl</button></li>
     
     </ul>
 	

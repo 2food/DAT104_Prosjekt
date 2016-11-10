@@ -1,10 +1,11 @@
 $(document).ready(function(){
 	var qCounter = 0;
 	var aCounter = 0;
-    $('#questions').html(function(i, ot) {
+    
+	/*$('#questions').html(function(i, ot) {
 		return ot + newQuestionButton();
 	});
-    
+    */
     $("body").on("click", ".add-alternative-button", function(){
 		aCounter = newAId(aCounter);
 		qName = $(this).parent().parent().siblings('input').attr('name');
@@ -48,7 +49,8 @@ function newQuestion(counter) {
 	var line = '<li class="question">';
     line += '<div class="extend-control"><button type="button" class="toggle-button">Lukk</button><button type="button" class="toggle-button" style="display:none">Utvid</button></div>';
     line += '<div class="question-container">Sp&oslashrsm&aringl:<br /><input type="text" name="newQ_' + counter + '">';
-    line += '<ul class="alternatives"><li class="alternative"><input type="checkbox" name ="newQ_' + counter + '_text">Fritekst</li>';
+    line += '<ul class="alternatives"><li class="alternative"><input type="checkbox" name ="newQ_' + counter + '_text">Inkluder tekstsvar</li>';
+    line += '<ul class="alternatives"><li class="alternative"><input type="checkbox" name ="newQ_' + counter + '_multiple"></li>';
     line += newAlternativeButton();
     line += '</ul></div></li>';
     return line;

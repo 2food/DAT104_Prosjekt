@@ -6,18 +6,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Sporris</title>
+<title>Sporris - ${sporris.sporris_name }</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <script src="javascript/jquery-3.1.1.js"> </script>
 <script src="javascript/sporris.js"> </script>
 
+<c:set var="radio" scope="page" value="radio"/>
+<c:set var="checkbox" scope="page" value="checkbox"/>
+
 </head>
 <body>
-	<form action="${url}" method="post">
+	<h2>${sporris.sporris_name }</h2>
+	<form action="${UrlMappings.SPORRISURL}" method="post">
 	<ul id="questions">
 		<c:forEach var="q" items="${sporris.questions}">
 			<li class="question">
-				<p>${q.question_text}</p>
+				<p class="question-text">${q.question_text}</p>
+				<c:if test="${not empty ssjb}">
+					<c:set var="key" scope="page" value="q${q.qid}"/>
+					<c:if test="${not empty ssjb.errors[key]}">
+						<p class="error-text" style="color:red">Error: ${ssjb.errors[key] }</p>
+					</c:if>
+				</c:if>
 				<ul class="alternatives">
 					<c:if test="${q.allow_text }">
 						<li class="alternative">
@@ -26,7 +36,7 @@
 					</c:if>
 					<c:forEach var="a" items="${q.alternatives}">
 						<li class="alternative">
-							<input type="checkbox" name="q_${q.qid}" value="a_${a.aid}">${a.alternative_text}<br>
+							<input type="${q.allow_multiple ? checkbox : radio}" name="q_${q.qid}" value="a_${a.aid}">${a.alternative_text}<br>
 						</li>					
 					</c:forEach>
 				
