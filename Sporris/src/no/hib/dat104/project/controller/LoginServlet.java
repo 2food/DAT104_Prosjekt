@@ -49,8 +49,8 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		LoginJavaBean login = (LoginJavaBean) session.getAttribute("login");
-		login.setUsername(request.getParameter("username"));
-		login.setPassword(request.getParameter("password"));
+		login.setUsername((String) request.getParameter("username"));
+		login.setPassword((String) request.getParameter("password"));
 		LoginValidator.validate(login, ueao);
 		if (!login.isValidUsername() || !login.isValidPassword()) {
 			request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);

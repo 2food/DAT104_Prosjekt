@@ -1,9 +1,5 @@
 package no.hib.dat104.project.controller;
 
-import static no.hib.dat104.project.controller.UrlMappings.EDITURL;
-import static no.hib.dat104.project.controller.UrlMappings.LOGINURL;
-import static no.hib.dat104.project.controller.UrlMappings.OVERSIKTURL;
-
 import java.io.IOException;
 
 import javax.ejb.EJB;
@@ -19,7 +15,7 @@ import no.hib.dat104.project.model.SporrisEAO;
 import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
 
-@WebServlet("/" + OVERSIKTURL)
+@WebServlet("/" + UrlMappings.OVERSIKTURL)
 public class OversiktServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +27,7 @@ public class OversiktServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (!SessionHelper.isUserLoggedIn(request)) {
-			response.sendRedirect(LOGINURL);
+			response.sendRedirect(UrlMappings.LOGINURL);
 		} else {
 			request.getRequestDispatcher("WEB-INF/jsp/oversikt.jsp").forward(request, response);
 		}
@@ -48,23 +44,22 @@ public class OversiktServlet extends HttpServlet {
 			seao.activateSporris(sporrisId);
 			User u = ueao.findUserCascade(((User) session.getAttribute("user")).getUid());
 			session.setAttribute("user", u);
-			response.sendRedirect(OVERSIKTURL);
+			response.sendRedirect(UrlMappings.OVERSIKTURL);
 		}
 
 		if (request.getParameter("statistics") != null) {
-			// sporrisEAO.activateSporris(sporrisIDAsInt);
-			response.sendRedirect(OVERSIKTURL);
+			response.sendRedirect(UrlMappings.RESULTAT);
 		}
 
 		if (request.getParameter("edit") != null) {
-			response.sendRedirect(EDITURL);
+			response.sendRedirect(UrlMappings.EDITURL);
 		}
 
 		if (request.getParameter("delete") != null) {
 			seao.removeSporris(sporrisId);
 			User u = ueao.findUserCascade(((User) session.getAttribute("user")).getUid());
 			session.setAttribute("user", u);
-			response.sendRedirect(OVERSIKTURL);
+			response.sendRedirect(UrlMappings.OVERSIKTURL);
 		}
 
 	}

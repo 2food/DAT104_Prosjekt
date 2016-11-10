@@ -1,5 +1,6 @@
 package no.hib.dat104.project.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(schema = "sporris_database", name = "question")
-public class Question {
-
+public class Question implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int qid;

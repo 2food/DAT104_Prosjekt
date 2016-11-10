@@ -37,7 +37,7 @@
 					</form></td>
 				<td><form action="<%=UrlMappings.OVERSIKTURL%>" method="post">
 						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
-							type="submit" name="statictics" value="Statistikk">
+							type="submit" name="statistics" value="Statistikk">
 					</form></td>
 				<td><form action="<%=UrlMappings.OVERSIKTURL%>" method="post">
 						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
