@@ -1,4 +1,10 @@
 package no.hib.dat104.project.helpers;
+
+
+/*
+ * Dette er materialet hentet fra git
+ */
+
 /**
  * OWASP Enterprise Security API (ESAPI)
  * 

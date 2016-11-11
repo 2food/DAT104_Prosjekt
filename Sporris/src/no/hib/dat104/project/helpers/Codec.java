@@ -1,5 +1,9 @@
 package no.hib.dat104.project.helpers;
 
+/*
+ * Dette er materialet hentet fra git
+ */
+
 /**
  * OWASP Enterprise Security API (ESAPI)
  * 
@@ -35,6 +39,7 @@ public abstract class Codec {
 	 * Initialize an array to mark which characters are to be encoded. Store the hex
 	 * string for that character to save time later. If the character shouldn't be
 	 * encoded, then store null.
+	 * 
 	 */
 	private static final String[] hex = new String[256];
 
