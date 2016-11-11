@@ -13,11 +13,12 @@ import javax.servlet.http.HttpSession;
 import no.hib.dat104.project.model.Sporris;
 import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
+import static no.hib.dat104.project.controller.UrlMappings.*;
 
 /**
  * Servlet implementation class NewSporrisServlet
  */
-@WebServlet("/"+UrlMappings.NEWSPORRIS)
+@WebServlet("/"+ NEWSPORRIS)
 public class NewSporrisServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -61,7 +62,7 @@ public class NewSporrisServlet extends HttpServlet {
 		session.setAttribute("sporrisId", sporris.getSid());
 		
 
-		response.sendRedirect(UrlMappings.EDITURL);
+		response.sendRedirect(EDITURL);
 		
 	}
 

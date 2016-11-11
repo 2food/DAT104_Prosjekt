@@ -1,6 +1,6 @@
 package no.hib.dat104.project.controller;
 
-import static no.hib.dat104.project.controller.UrlMappings.EDITURL;
+import static no.hib.dat104.project.controller.UrlMappings.*;
 import static no.hib.dat104.project.controller.UrlMappings.SPORRISURL;
 
 import java.io.IOException;
@@ -56,7 +56,8 @@ public class EditSporrisServlet extends HttpServlet {
 		
 
 		request.setAttribute("sporris", sporris);
-		response.sendRedirect(EDITURL); 
+		System.out.println(sporris.getSporris_name() + "er lagt til");
+		response.sendRedirect(OVERSIKTURL); 
 	}
 	
 

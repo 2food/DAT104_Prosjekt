@@ -27,6 +27,7 @@ public class OversiktServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (!SessionHelper.isUserLoggedIn(request)) {
+			System.out.println("ugyldig access");
 			response.sendRedirect(UrlMappings.LOGINURL);
 		} else {
 			HttpSession session = request.getSession();
@@ -50,10 +51,12 @@ public class OversiktServlet extends HttpServlet {
 			seao.activateSporris(sporrisId);
 			User u = ueao.findUserCascade(((User) session.getAttribute("user")).getUid());
 			session.setAttribute("user", u);
+			System.out.println("Endret aktiv");
 			response.sendRedirect(UrlMappings.OVERSIKTURL);
 		}
 
 		if (request.getParameter("statistics") != null) {
+			System.out.println("viser statistikk");
 			response.sendRedirect(UrlMappings.RESULTAT);
 		}
 

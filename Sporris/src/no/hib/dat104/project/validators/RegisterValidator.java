@@ -35,7 +35,7 @@ public class RegisterValidator {
 //				nameExists = true;
 //			}
 //		}
-//		//if(UEAO.findUser(username) != null)
+//	if(UEAO.findUser(username) != null)
 //			nameExists = true;
 		return nameExists;
 	}

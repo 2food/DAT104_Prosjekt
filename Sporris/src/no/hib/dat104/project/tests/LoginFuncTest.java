@@ -49,8 +49,8 @@ public class LoginFuncTest {
 	@Test 
 	public void correctUserTest() {
 		beginAt("login");
-		setTextField("username", "admin");
-		setTextField("password", "pass");
+		setTextField("username", "Extra");
+		setTextField("password", "passord1");
 		
 		submit();
 		assertTitleEquals("Kontrollpanel");
