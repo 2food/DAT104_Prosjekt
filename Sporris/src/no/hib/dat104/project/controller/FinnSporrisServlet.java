@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import no.hib.dat104.project.javabeans.FinnSporrisJavaBean;
+import no.hib.dat104.project.javabeans.RegistrerJavaBean;
 import no.hib.dat104.project.model.Sporris;
 import no.hib.dat104.project.model.SporrisEAO;
 
@@ -25,6 +27,7 @@ public class FinnSporrisServlet extends HttpServlet {
    
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		request.getRequestDispatcher("WEB-INF/jsp/finnSporris.jsp").forward(request, response);
 	}
 
@@ -41,9 +44,15 @@ public class FinnSporrisServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("tag", tag);
 		Sporris sporris;
+		FinnSporrisJavaBean finnInfo = new FinnSporrisJavaBean();
+		
 		if(seao.findSporrisByTag(tag)==null){
+			finnInfo.setFeilmelding("Fant ingen sporris med tag " + tag);
+			session.setAttribute("finnInfo", finnInfo);
+			System.out.println(finnInfo.getFeilmelding());
 			response.sendRedirect(FINNSPORRISURL);
-			System.out.println("Fant ingen sporris med tag" + tag);
+			
+
 		}else{
 			sporris = seao.findSporrisByTag(tag);
 			session.setAttribute("tag", tag);

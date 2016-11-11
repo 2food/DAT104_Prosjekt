@@ -16,6 +16,7 @@
 			<p>
 				Skriv inn spørris tag:<input type="text" name="tag">
 			</p>
+			<p> <font color='red'>${finnInfo.feilmelding}</font></p>
 			<p>
 				<input type="submit" value="Gå til Spørris">
 			</p>
