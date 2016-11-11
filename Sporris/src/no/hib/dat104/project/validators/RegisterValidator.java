@@ -10,24 +10,16 @@ public class RegisterValidator {
 
 	/*
 	 * Validerer brukernavn
-	 * @param username - Må ha mer enn 3 og mindre enn 20 tegn
+	 * @param username - Må ha mer enn 3 og mindre enn 20 tegn, bare tall og bokstaver
 	 */
 	public static boolean isValidUsername(String username){
-		boolean valid = true;
-		if (username.length() < 3 || username.length() > 20) {
-			valid = false;
-		}
-		return valid;
+		return username.matches("^[a-zA-Z0-9]{4,20}$");
 	}
 	/*
 	 * Validerer passord
 	 */
 	public static boolean isValidPassword(String password){
-		boolean validp = true;
-		if(password.length() < 1){
-			validp = false;
-		}
-		return validp;
+		return password.matches("^[a-zA-Z0-9]{8,20}$");
 	}
 	
 	/*
@@ -37,12 +29,14 @@ public class RegisterValidator {
 	 */
 	public static boolean usernameAlreadyExists(String username, UserEAO UEAO){
 		boolean nameExists =false;
-		List<User> allUsers = UEAO.allUsers();
-		for(User user : allUsers){
-			if(username.equals(user.getUser_name())){
-				nameExists = true;
-			}
-		}
+//		List<User> allUsers = UEAO.allUsers();
+//		for(User user : allUsers){
+//			if(username.equals(user.getUser_name())){
+//				nameExists = true;
+//			}
+//		}
+//		//if(UEAO.findUser(username) != null)
+//			nameExists = true;
 		return nameExists;
 	}
 	/*

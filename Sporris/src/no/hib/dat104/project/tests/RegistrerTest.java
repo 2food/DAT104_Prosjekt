@@ -12,15 +12,19 @@ public class RegistrerTest {
 	
 	@Test
 	public void usernameTest() {
-		assertTrue(validator.isValidUsername("Per"));
+		assertTrue(validator.isValidUsername("Pertter"));
 		assertTrue(validator.isValidUsername("Pettersen"));
 		assertFalse(validator.isValidUsername("dettenavneteraltforlangt"));
 	}
 	@Test
 	public void passwordTest(){
 		assertTrue(validator.isValidPassword("Hingst1234"));
-		assertTrue(validator.isValidPassword("Trollebukta?"));
+		assertFalse(validator.isValidPassword("Trollebukta?"));
 		assertFalse(validator.isValidPassword(""));
+		assertFalse(validator.isValidPassword("asdfg"));
+		assertTrue(validator.isValidPassword("DetteErGyldig"));
+		assertFalse(validator.isValidPassword("123"));
+		assertFalse(validator.isValidPassword("pass or 1=1"));
 	}
 	
 	@Test
