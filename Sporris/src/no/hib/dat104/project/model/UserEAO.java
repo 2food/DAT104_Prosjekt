@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
+
 import no.hib.dat104.project.model.User;
 
 @Stateless
@@ -29,7 +31,7 @@ public class UserEAO {
 	}
 
 	public List<Sporris> allSporris() {
-		TypedQuery<Sporris> query = em.createQuery("SELECT s FROM Sporris s", Sporris.class);
+		TypedQuery<Sporris> query = em.createQuery("SELECT s FROM Sporris s order by s.sporris_name asc", Sporris.class);
 		List<Sporris> q = query.getResultList();
 		return q;
 	}
@@ -65,7 +67,7 @@ public class UserEAO {
 	 * @author Torstein
 	 */
 	public List<Sporris> allSporrisByUser(User user) {
-		TypedQuery<Sporris> query = em.createQuery("SELECT s FROM Sporris s", Sporris.class);
+		TypedQuery<Sporris> query = em.createQuery("SELECT s FROM Sporris s order by s.sporris_name asc", Sporris.class);
 		List<Sporris> q = query.getResultList();
 		List<Sporris> sl = new ArrayList<Sporris>();;
 		for (Sporris s : q) {
