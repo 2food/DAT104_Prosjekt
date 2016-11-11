@@ -49,12 +49,14 @@ public class QuestionHelper {
 						if (request.getParameter("newQ_" + q + "_aid_" + a) != null) {
 							newA = new Alternative(request.getParameter("newQ_" + q + "_aid_" + a), newQ);
 							newQ.getAlternatives().add(newA);
+
+//							System.out.println("added newQ_" + q + "_aid_" + a);
 						}
 					}
 					if (!sporris.contains(newQ)) {
 						sporris.getQuestions().add(newQ);
 					}
-					// System.out.println("added q");
+//					System.out.println("added newQ_" + q);
 				}
 			}
 			// System.out.println(user.getSporrises().get(0).getQuestions().size());

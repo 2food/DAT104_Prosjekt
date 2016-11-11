@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(schema = "sporris_database", name = "question")
-public class Question {
+public class Question implements Comparable<Question>{
 
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
@@ -26,6 +26,8 @@ public class Question {
 	private Sporris question_sporris;
 	private boolean allow_multiple;
 	private boolean allow_text;
+	
+	private int list_index;
 	
 	@OneToMany(mappedBy = "alternative_question", cascade = CascadeType.ALL)
 	private List<Alternative> alternatives;
@@ -97,6 +99,14 @@ public class Question {
 		this.alternatives = alternatives;
 	}
 	
+	public int getList_index() {
+		return list_index;
+	}
+
+	public void setList_index(int list_index) {
+		this.list_index = list_index;
+	}
+
 	/**
 	 * checks if content equals
 	 * @param q
@@ -132,6 +142,11 @@ public class Question {
 			if (qid != q.getQid()) eq = false;
 		}
 		return eq;
+	}
+
+	@Override
+	public int compareTo(Question q) {
+		return list_index - q.getList_index();
 	}
 	
 

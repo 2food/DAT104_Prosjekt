@@ -56,7 +56,7 @@ public class EditSporrisServlet extends HttpServlet {
 		
 
 		request.setAttribute("sporris", sporris);
-		response.sendRedirect(EDITURL); 
+		response.sendRedirect(EDITURL);
 	}
 	
 

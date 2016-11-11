@@ -27,8 +27,6 @@ public class SporrisServlet extends HttpServlet {
 
 	@EJB
 	private UserEAO ueao;
-	int userId;
-	int sporrisId;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();  
@@ -37,9 +35,8 @@ public class SporrisServlet extends HttpServlet {
 //		user = DataLoader.getUser(session, ueao);
 		Sporris sporris;
 		sporris = DataLoader.getSporris(session, ueao);
+		sporris.setQuestions(sporris.getQuestionsOrdered());
 		request.setAttribute("sporris", sporris);
-		
-//		request.setAttribute("url", SPORRISURL);
 
 		request.getRequestDispatcher("WEB-INF/jsp/sporris.jsp").forward(request, response);
 	}
@@ -49,9 +46,11 @@ public class SporrisServlet extends HttpServlet {
 		HttpSession session = request.getSession();  
 		
 		User user;
-		user = DataLoader.getUser(session, ueao);
+//		user = DataLoader.getUser(session, ueao);
 		Sporris sporris;
 		sporris = DataLoader.getSporris(session, ueao);
+		user = sporris.getSporris_user();
+		ueao.updateUser(user);  
 		
 		Response r = ResponseParser.parseRequest(sporris, request);
 		// DEBUG
@@ -60,7 +59,7 @@ public class SporrisServlet extends HttpServlet {
 		SporrisSubmitJavaBean ssjb = new SporrisSubmitJavaBean(r, sporris);
 		if (ssjb.isValid()) {
 			sporris.addResponse(r);
-			ueao.updateUser(user);
+			ueao.updateUser(user);     
 			session.setAttribute("ssjb", null);
 			// DEBUG
 			System.out.println("response deemed valid");

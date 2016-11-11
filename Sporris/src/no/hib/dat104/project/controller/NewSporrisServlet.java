@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import no.hib.dat104.project.helpers.DataLoader;
 import no.hib.dat104.project.model.Sporris;
 import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
@@ -38,27 +39,15 @@ public class NewSporrisServlet extends HttpServlet {
 		Sporris sporris;
 		HttpSession session = request.getSession();
 		
-		// TODO sync w/ overview
-//		request.setAttribute("userId", 100);
-		if (session.getAttribute("userId") == null) {
-			session.setAttribute("userId", 100);
-		}
-		
-		userId = (Integer) session.getAttribute("userId");
-		if(session.getAttribute("user") == null || session.getAttribute("user").getClass().equals(User.class)) {
-			System.out.println("Dette skjer, uid: " + userId);
-			user = ueao.findUserCascade(userId);
-			session.setAttribute("user", user);			
-		} else {
-			user = (User) session.getAttribute("user");
-		}
+		user = DataLoader.getUser(session, ueao);
 		System.out.println(user.getUid());
 		sporris = new Sporris(user);
-		user.getSporrises().add(sporris);
+//		user.getSporrises().add(sporris);
+		user.addSporris(sporris);
 		ueao.updateUser(user);
-		ueao.addSporris(sporris);
+		//ueao.addSporris(sporris);
 		System.out.println(sporris.getSid());
-		session.setAttribute("sporrisId", sporris.getSid());
+		session.setAttribute("sporris", sporris);
 		
 
 		response.sendRedirect(UrlMappings.EDITURL);

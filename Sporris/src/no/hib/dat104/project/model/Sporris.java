@@ -2,7 +2,9 @@ package no.hib.dat104.project.model;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,6 +31,9 @@ public class Sporris implements Serializable{
 	private String sporris_name;
 	private String sporris_tag;
 	private boolean active;
+	
+	private Timestamp last_edited;
+	private Timestamp expire_timestamp;
 	
 	@ManyToOne
     @JoinColumn(name="sporris_user", referencedColumnName = "uid")
@@ -74,6 +79,9 @@ public class Sporris implements Serializable{
 	 * @param r
 	 */
 	public void addResponse(Response r) {
+		if(getActiveResult()==null) {
+			addResult();
+		}
 		getActiveResult().addResponse(r);
 	}
 	
@@ -144,6 +152,15 @@ public class Sporris implements Serializable{
 	}
 	
 	
+	public List<Question> getQuestionsOrdered() {
+		List<Question> ordered = new ArrayList<Question>();
+		for (Question q : questions) {
+			ordered.add(q);
+		}
+		Collections.sort(ordered);
+		return ordered;
+	}	
+	
 	public List<Question> getQuestions() {
 		return questions;
 	}
@@ -158,6 +175,22 @@ public class Sporris implements Serializable{
 	}
 	
 	
+	public Timestamp getLast_edited() {
+		return last_edited;
+	}
+
+	public void setLast_edited(Timestamp last_edited) {
+		this.last_edited = last_edited;
+	}
+
+	public Timestamp getExpire_timestamp() {
+		return expire_timestamp;
+	}
+
+	public void setExpire_timestamp(Timestamp expire_timestamp) {
+		this.expire_timestamp = expire_timestamp;
+	}
+
 	public boolean contains(Question q) {
 		boolean c = false;
 		for (Question q1 : questions) {
@@ -168,5 +201,4 @@ public class Sporris implements Serializable{
 		}
 		return c;
 	}
-	
 }

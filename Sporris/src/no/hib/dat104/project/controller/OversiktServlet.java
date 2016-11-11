@@ -62,7 +62,7 @@ public class OversiktServlet extends HttpServlet {
 
 		if (request.getParameter("delete") != null) {
 			seao.removeSporris(sporrisId);
-			User u = ueao.findUserCascade(((User) session.getAttribute("user")).getUid());
+			User u = ueao.findUserCascade(((User) session.getAttribute("user")).getUid()); 
 			session.setAttribute("user", u);
 			response.sendRedirect(OVERSIKTURL);
 		}

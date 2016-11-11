@@ -60,7 +60,6 @@ public class ResponseParser {
 		String key;
 		Integer value;
 		for (String q : questions){
-			System.out.println(q);
 			key = q.substring(0, q.indexOf(A_DELIM));
 			if ( q.indexOf("text") >= 0) {
 				value = q.length() - q.substring(0, q.indexOf("text")).replaceAll("a","").length();
