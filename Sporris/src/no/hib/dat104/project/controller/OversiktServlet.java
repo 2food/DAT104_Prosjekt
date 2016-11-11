@@ -29,7 +29,11 @@ public class OversiktServlet extends HttpServlet {
 		if (!SessionHelper.isUserLoggedIn(request)) {
 			response.sendRedirect(UrlMappings.LOGINURL);
 		} else {
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute("user");
+			System.out.println("User i session: " + user.getUser_name());
 			request.getRequestDispatcher("WEB-INF/jsp/oversikt.jsp").forward(request, response);
+			
 		}
 	}
 
@@ -39,6 +43,8 @@ public class OversiktServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		int sporrisId = Integer.parseInt(request.getParameter("sporrisID"));
 		session.setAttribute("sporrisId", sporrisId);
+		User user = (User) session.getAttribute("user");
+		System.out.println("User i session: " + user.getUser_name());
 		
 		if (request.getParameter("activate") != null) {
 			seao.activateSporris(sporrisId);
