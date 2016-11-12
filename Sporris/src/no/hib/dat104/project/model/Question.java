@@ -1,5 +1,6 @@
 package no.hib.dat104.project.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

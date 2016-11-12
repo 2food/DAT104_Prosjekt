@@ -73,14 +73,14 @@ public class OversiktServlet extends HttpServlet {
 		}
 
 		if (request.getParameter("newSporris") != null) {
-			User user = ueao.findUserCascade(((User) session.getAttribute("user")).getUid()); 
+			user = ueao.findUserCascade(((User) session.getAttribute("user")).getUid()); 
 			Sporris sporris = new Sporris(user);
 			user.addSporris(sporris);
 			user =  ueao.updateUser(user);
 			session.setAttribute("user",user);
 			session.setAttribute("sporris", sporris);
 			
-			response.sendRedirect(OVERSIKTURL);
+			response.sendRedirect(UrlMappings.OVERSIKTURL);
 		}
 
 	}
