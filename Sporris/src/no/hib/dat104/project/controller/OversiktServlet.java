@@ -80,7 +80,7 @@ public class OversiktServlet extends HttpServlet {
 			session.setAttribute("user",user);
 			session.setAttribute("sporris", sporris);
 			
-			response.sendRedirect(UrlMappings.OVERSIKTURL);
+			response.sendRedirect(UrlMappings.EDITURL);
 		}
 
 	}
