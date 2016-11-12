@@ -15,8 +15,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(schema = "sporris_database", name = "question")
-public class Question implements Comparable<Question>{
-
+public class Question implements Comparable<Question>, Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int qid;

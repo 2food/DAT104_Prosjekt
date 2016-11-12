@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import no.hib.dat104.project.helpers.GenerateID;
+import no.hib.dat104.project.helpers.Passordkryptering;
 import no.hib.dat104.project.helpers.SessionHelper;
 import no.hib.dat104.project.javabeans.RegistrerJavaBean;
 import no.hib.dat104.project.model.User;
@@ -83,7 +84,7 @@ public class RegistrerNewUserServlet extends HttpServlet {
 			// oppretter User og Legger til bruker i databasen
 			User user = new User();
 			user.setUser_name(username);
-			user.setUser_password(userpw);
+			user.setUser_password(Passordkryptering.krypterPassord(userpw));
 
 			userEAO.addUser(user);
 			// Legger til en login, true og username i session

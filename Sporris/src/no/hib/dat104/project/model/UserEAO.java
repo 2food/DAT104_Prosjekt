@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
+
 import no.hib.dat104.project.model.User;
 
 @Stateless

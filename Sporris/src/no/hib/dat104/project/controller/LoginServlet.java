@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import no.hib.dat104.project.helpers.Passordkryptering;
 import no.hib.dat104.project.helpers.SessionHelper;
 import no.hib.dat104.project.javabeans.LoginJavaBean;
 import no.hib.dat104.project.model.User;
@@ -49,8 +50,8 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		LoginJavaBean login = (LoginJavaBean) session.getAttribute("login");
-		login.setUsername(request.getParameter("username"));
-		login.setPassword(request.getParameter("password"));
+		login.setUsername((String) request.getParameter("username"));
+		login.setPassword((String) request.getParameter("password"));
 		LoginValidator.validate(login, ueao);
 		if (!login.isValidUsername() || !login.isValidPassword()) {
 			request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);

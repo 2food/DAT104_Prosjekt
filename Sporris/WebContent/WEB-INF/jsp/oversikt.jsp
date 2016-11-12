@@ -18,7 +18,7 @@
 	<p>
 	<table border="1">
 		<tr>
-			<th align="left">Id</th>
+			<th align="left">Tag</th>
 			<th>Spørris</th>
 			<th>status</th>
 			<th>statistikk</th>
@@ -28,7 +28,7 @@
 
 		<c:forEach items="${user.sporrises}" var="s">
 			<tr>
-				<td>${s.sid}</td>
+				<td>${s.sporris_tag}</td>
 				<td>${s.sporris_name}</td>
 
 				<td><form action="<%=UrlMappings.OVERSIKTURL%>" method="post">
@@ -37,7 +37,7 @@
 					</form></td>
 				<td><form action="<%=UrlMappings.OVERSIKTURL%>" method="post">
 						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
-							type="submit" name="statictics" value="Statistikk">
+							type="submit" name="statistics" value="Statistikk">
 					</form></td>
 				<td><form action="<%=UrlMappings.OVERSIKTURL%>" method="post">
 						<input type="hidden" name="sporrisID" value="${s.sid}"> <input
