@@ -21,7 +21,7 @@ public class Result {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int rid;
 	private String result_name;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="result_sporris", referencedColumnName="sid")
 	private Sporris result_sporris;
 	
@@ -39,6 +39,7 @@ public class Result {
 	}
 	
 	public void addResponse(Response r) {
+		r.setResponse_result(this);
 		responses.add(r);
 	}
 	

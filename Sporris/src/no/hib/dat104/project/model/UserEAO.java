@@ -180,8 +180,8 @@ public class UserEAO {
 		return user;
 	}
 	
-	public void updateUser(User s) {
-		em.merge(s);
+	public User updateUser(User s) {
+		return em.merge(s);
 	}
 	
 	public void removeUser(int uid) {
@@ -200,8 +200,8 @@ public class UserEAO {
 		em.persist(s);
 	}
 	
-	public void updateSporris(Sporris s) {
-		em.merge(s);
+	public Sporris updateSporris(Sporris s) {
+		return em.merge(s);
 	}
 	
 	public void addQuestion(Question q) {
@@ -220,5 +220,8 @@ public class UserEAO {
 		em.merge(a);
 	}
 	
+	public void removeObject(Object o) {
+		em.remove(o);
+	}
 
 }

@@ -49,7 +49,7 @@ public class DataLoader {
 		}
 		userId = (Integer) session.getAttribute("userId");
 		sporrisId = (Integer) session.getAttribute("sporrisId");
-		user = getUser(session, ueao);
+		//user = getUser(session, ueao);
 		if(session.getAttribute("sporris") == null || session.getAttribute("sporris").getClass().equals(Sporris.class)) {
 			user = ueao.findUserCascade(userId);
 			sporris = user.getSporris(sporrisId);

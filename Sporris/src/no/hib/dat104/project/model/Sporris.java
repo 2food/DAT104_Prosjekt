@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import no.hib.dat104.project.helpers.TagGenerator;
@@ -35,7 +36,7 @@ public class Sporris implements Serializable{
 	private Timestamp last_edited;
 	private Timestamp expire_timestamp;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="sporris_user", referencedColumnName = "uid")
     private User sporris_user;
 
@@ -200,5 +201,12 @@ public class Sporris implements Serializable{
 			}
 		}
 		return c;
+	}
+	
+	public int nextListIndex() {
+		int index = 0;
+		List<Question> ordered = getQuestionsOrdered();
+		if ((ordered != null) && ( ordered.size() > 0)) index = ordered.get(ordered.size() -1).getList_index() + 1;
+		return index;
 	}
 }

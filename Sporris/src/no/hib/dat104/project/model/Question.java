@@ -21,7 +21,7 @@ public class Question implements Comparable<Question>{
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int qid;
 	private String question_text;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="question_sporris", referencedColumnName = "sid")
 	private Sporris question_sporris;
 	private boolean allow_multiple;
@@ -49,6 +49,7 @@ public class Question implements Comparable<Question>{
 		allow_multiple = allowMultiple;
 		question_sporris = sporris;
 		alternatives = new ArrayList<Alternative>();
+		list_index = sporris.nextListIndex();
 	}
 	
 	/**
@@ -133,17 +134,28 @@ public class Question implements Comparable<Question>{
 		return eq;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		boolean eq = true;
-		if (!(obj instanceof Question)) eq = false;
-		else {
-			Question q = (Question) obj;
-			if (qid != q.getQid()) eq = false;
-		}
-		return eq;
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		boolean eq = true;
+//		if (!(obj instanceof Question)) eq = false;
+//		else {
+//			Question q = (Question) obj;
+//			if (qid != q.getQid()) eq = false;
+//		}
+//		return eq;
+//	}
 
+	@Override
+	public String toString() {
+		String s = question_text;
+		if (allow_text) s += "_text";
+		if (allow_multiple) s += "_multiple";	
+		for (Alternative a : alternatives) {
+			s += "_" + a.getAlternative_text();
+		}		
+		return s;
+	}
+	
 	@Override
 	public int compareTo(Question q) {
 		return list_index - q.getList_index();

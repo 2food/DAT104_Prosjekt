@@ -1,5 +1,6 @@
 package no.hib.dat104.project.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,7 @@ public class Alternative {
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int aid;
 	private String alternative_text;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "alternative_question", referencedColumnName = "qid")
 	private Question alternative_question;
 
@@ -64,14 +65,14 @@ public class Alternative {
 		return eq;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		boolean eq = true;
-		if (!(obj instanceof Alternative)) eq = false;
-		else {
-			Alternative q = (Alternative) obj;
-			if (aid != q.getAid()) eq = false;
-		}
-		return eq;
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		boolean eq = true;
+//		if (!(obj instanceof Alternative)) eq = false;
+//		else {
+//			Alternative q = (Alternative) obj;
+//			if (aid != q.getAid()) eq = false;
+//		}
+//		return eq;
+//	}
 }

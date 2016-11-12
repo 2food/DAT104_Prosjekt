@@ -36,6 +36,7 @@ public class EditSporrisServlet extends HttpServlet {
 //		user = DataLoader.getUser(session, ueao);
 		Sporris sporris;
 		sporris = DataLoader.getSporris(session, ueao);
+		sporris.setQuestions(sporris.getQuestionsOrdered());
 		
 		request.setAttribute("sporris", sporris);
 		request.getRequestDispatcher("WEB-INF/jsp/edit.jsp").forward(request, response);

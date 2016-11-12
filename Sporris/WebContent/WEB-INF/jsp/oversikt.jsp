@@ -55,6 +55,10 @@
 
 	<p>
 		<a href="<%=UrlMappings.NEWSPORRIS%>">Legg Til Spørris</a>
+		<form action="<%=UrlMappings.OVERSIKTURL %>" method="post">
+			<input type="hidden" name="sporrisID" value="0">
+			<input type="submit" name="newSporris" value="ny sporris">
+		</form>
 	</p>
 </body>
 </html>

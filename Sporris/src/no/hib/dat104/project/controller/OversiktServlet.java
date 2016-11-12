@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import no.hib.dat104.project.helpers.SessionHelper;
+import no.hib.dat104.project.model.Sporris;
 import no.hib.dat104.project.model.SporrisEAO;
 import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
@@ -64,6 +65,17 @@ public class OversiktServlet extends HttpServlet {
 			seao.removeSporris(sporrisId);
 			User u = ueao.findUserCascade(((User) session.getAttribute("user")).getUid()); 
 			session.setAttribute("user", u);
+			response.sendRedirect(OVERSIKTURL);
+		}
+
+		if (request.getParameter("newSporris") != null) {
+			User user = ueao.findUserCascade(((User) session.getAttribute("user")).getUid()); 
+			Sporris sporris = new Sporris(user);
+			user.addSporris(sporris);
+			user =  ueao.updateUser(user);
+			session.setAttribute("user",user);
+			session.setAttribute("sporris", sporris);
+			
 			response.sendRedirect(OVERSIKTURL);
 		}
 

@@ -44,23 +44,27 @@ public class QuestionHelper {
 					boolean allowMultiple = (request.getParameter("newQ_" + q + "_multiple") != null
 							&& request.getParameter("newQ_" + q + "_multiple").equals("on"));
 					newQ = new Question(request.getParameter("newQ_" + q), allowText, allowMultiple, sporris);
+
+//					sporris.addQuestion(newQ);
+//					ueao.addQuestion(newQ);
+					
 					
 					for (int a = 0; a <= newACounter; a++) {
 						if (request.getParameter("newQ_" + q + "_aid_" + a) != null) {
 							newA = new Alternative(request.getParameter("newQ_" + q + "_aid_" + a), newQ);
-							newQ.getAlternatives().add(newA);
-
+							newQ.addAlternative(newA);
 //							System.out.println("added newQ_" + q + "_aid_" + a);
 						}
 					}
 					if (!sporris.contains(newQ)) {
-						sporris.getQuestions().add(newQ);
+						sporris.addQuestion(newQ);
+//						System.out.println("added newQ_" + q);
 					}
-//					System.out.println("added newQ_" + q);
 				}
 			}
 			// System.out.println(user.getSporrises().get(0).getQuestions().size());
 			ueao.updateUser(user);
+//			ueao.updateSporris(sporris);
 		}
 	}
 }
