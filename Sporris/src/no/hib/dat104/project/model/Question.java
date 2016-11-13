@@ -23,7 +23,7 @@ public class Question implements Comparable<Question>, Serializable{
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int qid;
 	private String question_text;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="question_sporris", referencedColumnName = "sid")
 	private Sporris question_sporris;
 	private boolean allow_multiple;

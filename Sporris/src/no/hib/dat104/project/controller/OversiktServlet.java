@@ -79,8 +79,9 @@ public class OversiktServlet extends HttpServlet {
 			user =  ueao.updateUser(user);
 			session.setAttribute("user",user);
 			session.setAttribute("sporris", sporris);
-			
-			response.sendRedirect(UrlMappings.EDITURL);
+
+//			response.sendRedirect(UrlMappings.EDITURL);
+			response.sendRedirect(UrlMappings.OVERSIKTURL);
 		}
 
 	}

@@ -36,7 +36,7 @@ public class Sporris implements Serializable{
 	private Timestamp last_edited;
 	private Timestamp expire_timestamp;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name="sporris_user", referencedColumnName = "uid")
     private User sporris_user;
 
@@ -154,11 +154,14 @@ public class Sporris implements Serializable{
 	
 	
 	public List<Question> getQuestionsOrdered() {
-		List<Question> ordered = new ArrayList<Question>();
-		for (Question q : questions) {
-			ordered.add(q);
+		List<Question> ordered = null;
+		if (questions != null) {
+			ordered = new ArrayList<Question>();
+			for (Question q : questions) {
+				ordered.add(q);
+			}
+			Collections.sort(ordered);
 		}
-		Collections.sort(ordered);
 		return ordered;
 	}	
 	
@@ -194,10 +197,12 @@ public class Sporris implements Serializable{
 
 	public boolean contains(Question q) {
 		boolean c = false;
-		for (Question q1 : questions) {
-			if (q1.contentEquals(q)) {
-				c = true;
-				break;
+		if (questions != null) {
+			for (Question q1 : questions) {
+				if (q1.contentEquals(q)) {
+					c = true;
+					break;
+				}
 			}
 		}
 		return c;
