@@ -46,6 +46,7 @@ public class User {
 		if (sporrises == null) {
 			sporrises = new ArrayList<Sporris>();
 		}
+		sporris.setSporris_user(this);
 		sporrises.add(sporris);
 	}
 	

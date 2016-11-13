@@ -76,11 +76,11 @@ public class OversiktServlet extends HttpServlet {
 			user = ueao.findUserCascade(((User) session.getAttribute("user")).getUid()); 
 			Sporris sporris = new Sporris(user);
 			user.addSporris(sporris);
-			user =  ueao.updateUser(user);
+ 
 			session.setAttribute("user",user);
 			session.setAttribute("sporris", sporris);
 			
-			response.sendRedirect(UrlMappings.EDITURL);
+			response.sendRedirect(UrlMappings.OVERSIKTURL);
 		}
 
 	}

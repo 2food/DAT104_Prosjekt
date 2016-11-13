@@ -47,7 +47,7 @@ public class Sporris implements Serializable{
 	private List<Result> results;
 	
 	public Sporris() {
-		
+		this(new User());
 	}
 	
 	/**
@@ -72,6 +72,8 @@ public class Sporris implements Serializable{
 		if (questions == null) {
 			questions = new ArrayList<Question>();
 		}
+		q.setQuestion_sporris(this);
+		q.setList_index(nextListIndex());
 		questions.add(q);
 	}
 	

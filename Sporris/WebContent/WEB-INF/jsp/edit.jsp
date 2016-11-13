@@ -36,12 +36,20 @@
 					<button class="toggle-button" type="button" style="display:none">Utvid</button>
 				</div>
 				<div class="question-container">
-					<p class="question-text"> ${q.question_text} </p>
+					Sp&oslashrsm&aringl:<br />
+					<input type="text" name="oldQ_${q.qid }" value="${q.question_text}">
+					<button type="button" class="remove-grandparent">X</button>
 					<ul id="alternatives">
-						<li class="alternative"><input type="checkbox" ${q.allow_text ? checked : unchecked}> Fritekst</li>
+						<li class="alternative"><input type="checkbox" ${q.allow_text ? checked : unchecked}> Inkluder tekstsvar</li>
+						<li class="alternative"><input type="checkbox" ${q.allow_multiple ? checked : unchecked}> Flervalg</li>
 						<c:forEach var="a" items="${q.alternatives}">
-							<li class="alternative">${a.alternative_text}</li>					
+							<li class="alternative">
+								Alternativ: 
+								<input type="text" name="oldQ_${q.qid }_oldA_${a.aid}" value="${a.alternative_text}">
+	    						<button type="button" class="remove-parent">X</button>
+							</li>				
 						</c:forEach> 
+						<li class="alternative"><button type="button" class="button add-alternative-button">Legg til alternativ</button></li>	
 					</ul>
 				</div>
 			</li>

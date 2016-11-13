@@ -31,6 +31,11 @@ $(document).ready(function(){
         $(this).parent().remove();
         
     });
+	
+    $("body").on("click", "button.remove-grandparent", function(){
+        $(this).parent().parent().remove();
+        
+    });
     
 });
 
@@ -48,7 +53,7 @@ function newAId(aCounter) {
 function newQuestion(counter) {
 	var line = '<li class="question">';
     line += '<div class="extend-control"><button type="button" class="toggle-button">Lukk</button><button type="button" class="toggle-button" style="display:none">Utvid</button></div>';
-    line += '<div class="question-container">Sp&oslashrsm&aringl:<br /><input type="text" name="newQ_' + counter + '">';
+    line += '<div class="question-container">Sp&oslashrsm&aringl:<br /><input type="text" name="newQ_' + counter + '"><button type="button" class="remove-grandparent">X</button>';
     line += '<ul class="alternatives"><li class="alternative"><input type="checkbox" name ="newQ_' + counter + '_text">Inkluder tekstsvar</li>';
     line += '<li class="alternative"><input type="checkbox" name ="newQ_' + counter + '_multiple">Flervalg</li>';
     line += newAlternativeButton();
@@ -57,7 +62,7 @@ function newQuestion(counter) {
 }
 
 function newAlternative(qName, aCounter) {
-    var line = '<li class="alternative">Alternativ#: <input type="text" name="' + qName + '_aid_' + aCounter + '">';
+    var line = '<li class="alternative">Alternativ: <input type="text" name="' + qName + '_newA_' + aCounter + '">';
     line += '<button type="button" class="remove-parent">X</button></li>';
     return line;
 }

@@ -1,7 +1,7 @@
 package no.hib.dat104.project.controller;
 
-import static no.hib.dat104.project.controller.UrlMappings.*;
-import static no.hib.dat104.project.controller.UrlMappings.SPORRISURL;
+import static no.hib.dat104.project.controller.UrlMappings.EDITURL;
+import static no.hib.dat104.project.controller.UrlMappings.OVERSIKTURL;
 
 import java.io.IOException;
 
@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import no.hib.dat104.project.helpers.DataLoader;
 import no.hib.dat104.project.helpers.QuestionHelper;
 import no.hib.dat104.project.model.Sporris;
+import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
 
 /**
@@ -47,16 +48,20 @@ public class EditSporrisServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(); 
 		
-//		User user;
-//		user = DataLoader.getUser(session, ueao);
+		User user;
 		Sporris sporris;
 		sporris = DataLoader.getSporris(session, ueao);
+		user = sporris.getSporris_user();
 		
-		QuestionHelper.saveNewQuestions(ueao, sporris, request);
+		sporris = QuestionHelper.editSporris(sporris, request);
+		sporris.setSporris_user(user);
+		
+		ueao.updateUser(user);
+		
+		//QuestionHelper.saveNewQuestions(ueao, sporris, request);
 		
 
 		request.setAttribute("sporris", sporris);
-		System.out.println(sporris.getSporris_name() + "er lagt til");
 		response.sendRedirect(OVERSIKTURL); 
 	}
 	
