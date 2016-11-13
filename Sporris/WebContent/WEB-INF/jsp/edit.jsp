@@ -38,7 +38,8 @@
 				<div class="question-container">
 					<p class="question-text"> ${q.question_text} </p>
 					<ul id="alternatives">
-						<li class="alternative"><input type="checkbox" ${q.allow_text ? checked : unchecked}> Fritekst</li>
+						<li class="alternative"><input type="checkbox" ${q.allow_text ? checked : unchecked}> Inkluder tekstsvar</li>
+						<li class="alternative"><input type="checkbox" ${q.allow_multiple ? checked : unchecked}> Flervalg</li>
 						<c:forEach var="a" items="${q.alternatives}">
 							<li class="alternative">${a.alternative_text}</li>					
 						</c:forEach> 
