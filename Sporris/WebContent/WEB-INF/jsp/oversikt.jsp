@@ -56,7 +56,7 @@
 	<p>
 		<form action="<%=UrlMappings.OVERSIKTURL %>" method="post">
 			<input type="hidden" name="sporrisID" value="0">
-			<input type="submit" name="newSporris" value="Oppratt ny sporris">
+			<input type="submit" name="newSporris" value="Opprett ny sporris">
 		</form>
 	</p>
 </body>

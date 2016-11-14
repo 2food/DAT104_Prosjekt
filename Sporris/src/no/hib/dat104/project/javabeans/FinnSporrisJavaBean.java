@@ -1,5 +1,4 @@
 package no.hib.dat104.project.javabeans;
-import javax.servlet.http.HttpServletRequest;
 
 public class FinnSporrisJavaBean {
 	private String feilmelding = "";

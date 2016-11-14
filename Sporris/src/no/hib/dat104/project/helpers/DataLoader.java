@@ -3,6 +3,7 @@ package no.hib.dat104.project.helpers;
 import javax.servlet.http.HttpSession;
 
 import no.hib.dat104.project.model.Sporris;
+import no.hib.dat104.project.model.SporrisEAO;
 import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
 
@@ -39,22 +40,12 @@ public class DataLoader {
 	 * @author Torstein
 	 */
 	public static Sporris getSporris(HttpSession session, UserEAO ueao) {
-		Sporris sporris;
-		User user;
-		int userId;
-		int sporrisId;
-		if (session.getAttribute("userId") == null || session.getAttribute("sporrisId") == null) {
-			session.setAttribute("sporrisId", 100);
-			session.setAttribute("userId", 100);
-		}
-		userId = (Integer) session.getAttribute("userId");
-		sporrisId = (Integer) session.getAttribute("sporrisId");
-		//user = getUser(session, ueao);
-		if(session.getAttribute("sporris") == null || session.getAttribute("sporris").getClass().equals(Sporris.class)) {
-			user = ueao.findUserCascade(userId);
-			sporris = user.getSporris(sporrisId);
-		} else {
+		Sporris sporris = null;
+		if (session.getAttribute("sporrisId") == null){
 			sporris = (Sporris) session.getAttribute("sporris");
+		} else {
+			int sporrisId = (Integer) session.getAttribute("sporrisId");
+			sporris = ueao.findSporrisCascade(sporrisId);
 		}
 		return sporris;
 	}

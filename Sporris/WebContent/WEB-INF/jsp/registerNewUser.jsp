@@ -31,5 +31,6 @@
 			</p>
 		</fieldset>
 	</form>
+	<a href="index.html">Tilbake til forsiden</a>
 </body>
 </html>

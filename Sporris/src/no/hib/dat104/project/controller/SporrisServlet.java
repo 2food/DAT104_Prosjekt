@@ -17,6 +17,7 @@ import no.hib.dat104.project.helpers.ResponseParser;
 import no.hib.dat104.project.javabeans.SporrisSubmitJavaBean;
 import no.hib.dat104.project.model.Response;
 import no.hib.dat104.project.model.Sporris;
+import no.hib.dat104.project.model.SporrisEAO;
 import no.hib.dat104.project.model.User;
 import no.hib.dat104.project.model.UserEAO;
 
@@ -27,6 +28,8 @@ public class SporrisServlet extends HttpServlet {
 
 	@EJB
 	private UserEAO ueao;
+	@EJB
+	private SporrisEAO seao;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();  

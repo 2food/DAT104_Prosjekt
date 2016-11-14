@@ -4,7 +4,6 @@ import static no.hib.dat104.project.controller.UrlMappings.FINNSPORRISURL;
 import static no.hib.dat104.project.controller.UrlMappings.SPORRISURL;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import no.hib.dat104.project.javabeans.FinnSporrisJavaBean;
-import no.hib.dat104.project.javabeans.RegistrerJavaBean;
 import no.hib.dat104.project.model.Sporris;
 import no.hib.dat104.project.model.SporrisEAO;
 
@@ -27,13 +25,12 @@ public class FinnSporrisServlet extends HttpServlet {
    
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		request.getRequestDispatcher("WEB-INF/jsp/finnSporris.jsp").forward(request, response);
 	}
 
 	/*
-	 * Sjekker om input tag er lik en tag som ligger i databasen for spørris. Hvis det finnes en match
-	 * så redirectes bruker til Sporris.jsp ettersom vi henviser til SporrisServlet
+	 * Sjekker om input tag er lik en tag som ligger i databasen for spï¿½rris. Hvis det finnes en match
+	 * sï¿½ redirectes bruker til Sporris.jsp ettersom vi henviser til SporrisServlet
 	 * 
 	 * @Author Bojar
 	 */
@@ -53,12 +50,20 @@ public class FinnSporrisServlet extends HttpServlet {
 			response.sendRedirect(FINNSPORRISURL);
 			
 
-		}else{
+		}else {
 			sporris = seao.findSporrisByTag(tag);
-			session.setAttribute("tag", tag);
-			session.setAttribute("sporris", sporris);
-			System.out.println("Setter tag i session hvis gyldig tag");
-			response.sendRedirect(SPORRISURL);
+			if (sporris.isActive()) {
+				session.setAttribute("tag", tag);
+				session.setAttribute("sporrisId", sporris.getSid());
+				System.out.println("Setter tag i session hvis gyldig tag");
+				response.sendRedirect(SPORRISURL);
+			} else {
+				finnInfo.setFeilmelding("SpÃ¸rris med tag "+tag+" er ikke aktivert");
+				session.setAttribute("finnInfo", finnInfo);
+				System.out.println(finnInfo.getFeilmelding());
+				response.sendRedirect(FINNSPORRISURL);
+			}
+			
 		}
 	}
 

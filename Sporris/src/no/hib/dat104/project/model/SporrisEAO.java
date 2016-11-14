@@ -1,8 +1,5 @@
 package no.hib.dat104.project.model;
 
-import static no.hib.dat104.project.controller.UrlMappings.FINNSPORRISURL;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
