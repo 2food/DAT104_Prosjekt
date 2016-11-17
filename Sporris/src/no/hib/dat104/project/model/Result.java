@@ -27,7 +27,7 @@ public class Result {
 	
 	@OneToMany(mappedBy = "response_result", cascade = CascadeType.ALL)
 	private List<Response> responses;
-	
+
 	public Result() {
 		
 	}

@@ -9,8 +9,8 @@ import no.hib.dat104.project.model.Sporris;
 
 public class SporrisSubmitJavaBean {
 
-	static String TOO_FEW_ALTERNATIVES = "Du må velge et alternativ.";
-	static String NO_TEXT_ANSWER = "Du må fylle inn tekstboksen.";
+	static String TOO_FEW_ALTERNATIVES = "Du mï¿½ velge et alternativ.";
+	static String NO_TEXT_ANSWER = "Du mï¿½ fylle inn tekstboksen.";
 	
 	private HashMap<String, String> errors;
 	private boolean valid;

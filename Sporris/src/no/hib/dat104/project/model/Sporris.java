@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import no.hib.dat104.project.helpers.TagGenerator;
@@ -55,10 +54,10 @@ public class Sporris implements Serializable{
 	 * @author Torstein
 	 */
 	public Sporris(User owner) {
-		sporris_name = "Ny Spørris";
+		sporris_name = "Ny Spï¿½rris";
 		sporris_tag = TagGenerator.nyTag();
 		sporris_user = owner;
-		active = true;
+		active = false;
 		questions = new ArrayList<Question>();
 		results = new ArrayList<Result>();
 		
@@ -108,6 +107,8 @@ public class Sporris implements Serializable{
 		if (results == null) {
 			results = new ArrayList<Result>();
 			result = new Result(this);
+			System.out.println(result.getResult_name());
+			System.out.println(results.isEmpty());
 			results.add(result);
 		} else {
 			for (Result r : results	) {

@@ -39,7 +39,6 @@
 							<input type="${q.allow_multiple ? checkbox : radio}" name="q_${q.qid}" value="a_${a.aid}">${a.alternative_text}<br>
 						</li>					
 					</c:forEach>
-				
 				</ul>
 			</li>
 		</c:forEach> 

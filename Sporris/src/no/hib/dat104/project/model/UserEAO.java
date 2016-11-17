@@ -9,9 +9,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-
-import no.hib.dat104.project.model.User;
-
 @Stateless
 public class UserEAO {
 
@@ -57,9 +54,11 @@ public class UserEAO {
 	public Sporris findSporrisCascade(Integer uid) {
 		Sporris sporris = em.find(Sporris.class, uid);
 		sporris.setQuestions(allQuestionsBySporris(sporris));
+		sporris.setResults(allResultsBySporris(sporris));
 		return sporris;
 	}
 	
+
 	/**
 	 * get all sporrises of user
 	 * @param user
@@ -107,10 +106,10 @@ public class UserEAO {
 	 * @return List<Alternative>
 	 * @author Torstein
 	 */
-	public List<Alternative> allAlternativesByQuestion(Question question) {
+	public ArrayList<Alternative> allAlternativesByQuestion(Question question) {
 		TypedQuery<Alternative> query = em.createQuery("SELECT a FROM Alternative a", Alternative.class);
 		List<Alternative> q = query.getResultList();
-		List<Alternative> al = new ArrayList<Alternative>();;
+		ArrayList<Alternative> al = new ArrayList<Alternative>();;
 		for (Alternative a : q) {
 			if (a.getAlternative_question().equals(question)) {
 				al.add(a);
